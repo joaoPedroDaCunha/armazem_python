@@ -125,10 +125,18 @@ def salvar_dados():
                     ws_descarga_sal['D22'] = nf2
                     ws_descarga_sal['K22'] = nfpalete2
                     ws_descarga_sal['P22'] = peso2
+                else :
+                    ws_descarga_sal['D22'] = " "
+                    ws_descarga_sal['K22'] = " "
+                    ws_descarga_sal['P22'] = " "
                 if checkbox_lote3_var.get() == 1:
                     ws_descarga_sal['D24'] = nf3
                     ws_descarga_sal['K24'] = nfpalete3
                     ws_descarga_sal['P24'] = peso3
+                else :
+                    ws_descarga_sal['D24'] = " "
+                    ws_descarga_sal['K24'] = " "
+                    ws_descarga_sal['P24'] = " "
                 ws_descarga_sal['D26'] = prod
                 ws_descarga_sal['L26'] = val
                 ws_descarga_sal['D28'] = lote1
@@ -140,11 +148,21 @@ def salvar_dados():
                     ws_descarga_sal['H30'] = nf2
                     ws_descarga_sal['K30'] = peso2
                     ws_descarga_sal['O30'] = qtd2
+                else :
+                    ws_descarga_sal['D30'] = " "
+                    ws_descarga_sal['H30'] = " "
+                    ws_descarga_sal['K30'] = " "
+                    ws_descarga_sal['O30'] = " "
                 if checkbox_lote3_var.get() == 1:
                     ws_descarga_sal['D32'] = lote3
                     ws_descarga_sal['H32'] = nf3
                     ws_descarga_sal['K32'] = peso3
                     ws_descarga_sal['O32'] = qtd3
+                else :
+                    ws_descarga_sal['D32'] = " "
+                    ws_descarga_sal['H32'] = " "
+                    ws_descarga_sal['K32'] = " "
+                    ws_descarga_sal['O32'] = " "
 
 
         else:
@@ -164,6 +182,7 @@ def salvar_dados():
 
             # Cria a planilha de Descarga do Sal
             ws_descarga_sal = wb.create_sheet("Descarga do Sal")
+            ws_descarga_sal = wb['Descarga do Sal']
             ws_descarga_sal['D8'] = date
             ws_descarga_sal['K8'] = horario
             ws_descarga_sal['D10'] = nome
@@ -180,10 +199,18 @@ def salvar_dados():
                 ws_descarga_sal['D22'] = nf2
                 ws_descarga_sal['K22'] = nfpalete2
                 ws_descarga_sal['P22'] = peso2
+            else :
+                ws_descarga_sal['D22'] = " "
+                ws_descarga_sal['K22'] = " "
+                ws_descarga_sal['P22'] = " "
             if checkbox_lote3_var.get() == 1:
                 ws_descarga_sal['D24'] = nf3
                 ws_descarga_sal['K24'] = nfpalete3
                 ws_descarga_sal['P24'] = peso3
+            else :
+                ws_descarga_sal['D24'] = " "
+                ws_descarga_sal['K24'] = " "
+                ws_descarga_sal['P24'] = " "
             ws_descarga_sal['D26'] = prod
             ws_descarga_sal['L26'] = val
             ws_descarga_sal['D28'] = lote1
@@ -195,12 +222,22 @@ def salvar_dados():
                 ws_descarga_sal['H30'] = nf2
                 ws_descarga_sal['K30'] = peso2
                 ws_descarga_sal['O30'] = qtd2
+            else :
+                ws_descarga_sal['D30'] = " "
+                ws_descarga_sal['H30'] = " "
+                ws_descarga_sal['K30'] = " "
+                ws_descarga_sal['O30'] = " "
             if checkbox_lote3_var.get() == 1:
                 ws_descarga_sal['D32'] = lote3
                 ws_descarga_sal['H32'] = nf3
                 ws_descarga_sal['K32'] = peso3
                 ws_descarga_sal['O32'] = qtd3
-            
+            else :
+                ws_descarga_sal['D32'] = " "
+                ws_descarga_sal['H32'] = " "
+                ws_descarga_sal['K32'] = " "
+                ws_descarga_sal['O32'] = " "
+        
 
         # Salva a planilha
         wb.save('dados.xlsx')
