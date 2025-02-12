@@ -368,19 +368,47 @@ def txtprogramação():
         with open('meuarquivo.txt', 'w') as arquivo:
             # Escreve uma linha no arquivo
             if checkbox_lote2_var.get() == 0 and checkbox_lote3_var.get() == 0 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod}{carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod} {carga} {trans}\n')
             if checkbox_lote2_var.get() == 1 and checkbox_lote3_var.get() == 0 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1+peso2} {placa} {tipo} {prod}{carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1+peso2} {placa} {tipo} {prod} {carga} {trans}\n')
             if checkbox_lote2_var.get() == 1 and checkbox_lote3_var.get() == 1 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1} {placa+peso2+peso3} {tipo} {prod}{carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1} {placa+peso2+peso3} {tipo} {prod} {carga} {trans}\n')
 
         print('Texto escrito com sucesso!')
 
+        time.sleep(3)
         # Abre o arquivo txt automaticamente no editor de texto padrão do sistema
         os.startfile('meuarquivo.txt')
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
+def limpar():
+    try:
+        entry_date.delete(0,tk.END)
+        entry_horario.delete(0,tk.END)
+        entry_nome.delete(0,tk.END)
+        entry_telefone.delete(0,tk.END)
+        entry_placa.delete(0,tk.END)
+        entry_tipo.delete(0,tk.END)
+        entry_trans.delete(0,tk.END)
+        entry_val.delete(0,tk.END)
+        entry_nfsal1.delete(0,tk.END)
+        entry_nfpalete1.delete(0,tk.END)
+        entry_qtdpalete1.delete(0,tk.END)
+        entry_lotesal1.delete(0,tk.END)
+        entry_peso1.delete(0,tk.END)
+        entry_nfsal2.delete(0,tk.END)
+        entry_nfpalete2.delete(0,tk.END)
+        entry_qtdpalete2.delete(0,tk.END)
+        entry_lotesal2.delete(0,tk.END)
+        entry_peso2.delete(0,tk.END)
+        entry_nfsal3.delete(0,tk.END)
+        entry_nfpalete3.delete(0,tk.END)
+        entry_qtdpalete3.delete(0,tk.END)
+        entry_lotesal3.delete(0,tk.END)
+        entry_peso3.delete(0,tk.END)
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 
 # Cria a janela principal
@@ -565,6 +593,10 @@ botao_salvar.grid(row=16, columnspan=5)
 
 botao_imprimir = tk.Button(janela,text="Imprimir Espelho",command=imprimirespelho)
 botao_imprimir.grid(row=16, columnspan=9)
+
+botao_limpar = tk.Button(janela,text="Limpar informações",command=limpar)
+botao_limpar.grid(row=1, column=8)
+
 
 # Inicia a aplicação
 janela.mainloop()
