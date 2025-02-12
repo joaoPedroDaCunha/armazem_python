@@ -274,7 +274,6 @@ def salvar_dados():
 
             # Salva a planilha
             wb.save('dados.xlsx')
-            txtprogramação()
             messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
 
         else:
@@ -596,6 +595,9 @@ botao_imprimir.grid(row=16, columnspan=9)
 
 botao_limpar = tk.Button(janela,text="Limpar informações",command=limpar)
 botao_limpar.grid(row=1, column=8)
+
+botao_programaçao = tk.Button(janela,text="Pramação txt",command=txtprogramação)
+botao_programaçao.grid(row=16, column=8)
 
 
 # Inicia a aplicação
