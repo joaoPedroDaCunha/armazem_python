@@ -280,7 +280,12 @@ def salvar_dados():
         messagebox.showerror("Erro", "Preencha todos os campos obrigatórios.")
 
 def imprimirespelho():
-    arquivo_excel = 'c:\\Leitor XML\\dados.xlsx'
+
+    # Obtém o caminho da pasta local onde o script está sendo executado
+    caminho_local = os.path.dirname(os.path.abspath(__file__))
+
+    # Substitua 'dados.xlsx' pelo nome do seu arquivo Excel
+    arquivo_excel = os.path.join(caminho_local, 'dados.xlsx')
 
     # Substitua 'Nome_da_Tabela' pelo nome da tabela que você deseja ler
     nome_tabela = 'Descarga do Sal'
@@ -296,14 +301,14 @@ def imprimirespelho():
     excel = win32.Dispatch('Excel.Application')
     excel.Visible = False
 
-    wb = excel.Workbooks.Open(r'{}'.format(arquivo_excel))
+    wb = excel.Workbooks.Open(arquivo_excel)
     ws = wb.Worksheets(nome_tabela)
 
     # Salva o arquivo Excel para garantir que as configurações de impressão sejam aplicadas
     wb.Save()
 
     # Exporta a planilha como PDF
-    pdf_path = r'c:\\Leitor XML\\tabela_formatada.pdf'
+    pdf_path = os.path.join(caminho_local, 'tabela_formatada.pdf')
     ws.ExportAsFixedFormat(0, pdf_path)
 
     wb.Close()
@@ -324,6 +329,7 @@ def imprimirespelho():
     if os.path.exists(pdf_path):
         os.remove(pdf_path)
         print(f"PDF {pdf_path} excluído com sucesso!")
+
 
 
 
