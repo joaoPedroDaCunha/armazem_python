@@ -383,9 +383,12 @@ entry_date = tk.Entry(janela)
 entry_date.grid(row=0, column=1)
 
 label_horario = tk.Label(janela, text="Horário de chegada:")
-label_horario.grid(row=1, column=0)
+label_horario.grid(row=0, column=3)
 entry_horario = tk.Entry(janela)
-entry_horario.grid(row=1, column=1)
+entry_horario.grid(row=0, column=4)
+
+label_espaco = tk.Label(janela)
+label_espaco.grid(row=1)
 
 label_nome = tk.Label(janela, text="Nome do motorista:")
 label_nome.grid(row=2, column=0)
@@ -393,9 +396,12 @@ entry_nome = tk.Entry(janela)
 entry_nome.grid(row=2, column=1)
 
 label_telefone = tk.Label(janela, text="Telefone:")
-label_telefone.grid(row=3, column=0)
+label_telefone.grid(row=2, column=3)
 entry_telefone = tk.Entry(janela)
-entry_telefone.grid(row=3, column=1)
+entry_telefone.grid(row=2, column=4)
+
+label_espaco = tk.Label(janela)
+label_espaco.grid(row=3)
 
 label_placa = tk.Label(janela, text="Placa do veículo:")
 label_placa.grid(row=4, column=0)
@@ -403,9 +409,12 @@ entry_placa = tk.Entry(janela)
 entry_placa.grid(row=4, column=1)
 
 label_tipo = tk.Label(janela, text="Tipo de Veículo:")
-label_tipo.grid(row=5, column=0)
+label_tipo.grid(row=4, column=3)
 entry_tipo = tk.Entry(janela)
-entry_tipo.grid(row=5, column=1)
+entry_tipo.grid(row=4, column=4)
+
+label_espaco = tk.Label(janela)
+label_espaco.grid(row=5)
 
 label_trans = tk.Label(janela, text="Transportadora:")
 label_trans.grid(row=6, column=0)
@@ -428,10 +437,10 @@ combobox_prod.grid(row=8, column=1)
 combobox_prod.set("Selecione uma opção")
 
 label_carga = tk.Label(janela, text="Tipo de Carga:")
-label_carga.grid(row=9, column=0)
+label_carga.grid(row=8, column=3)
 
 combobox_carga = ttk.Combobox(janela, values=["BIG BAG", "25 KG"])
-combobox_carga.grid(row=9, column=1)
+combobox_carga.grid(row=8, column=4)
 combobox_carga.set("Selecione uma opção")
 
 label_val = tk.Label(janela, text="Validade:")
@@ -440,7 +449,7 @@ label_val.grid(row=10, column=0)
 entry_val = tk.Entry(janela)
 entry_val.grid(row=10, column=1)
 
-label_nfsal1 = tk.Label(janela, text="NF do SAL:")
+label_nfsal1 = tk.Label(janela, text="NF do produto:")
 label_nfsal1.grid(row=11, column=0)
 
 entry_nfsal1 = tk.Entry(janela)
@@ -474,7 +483,7 @@ checkbox_lote2_var = tk.IntVar()
 checkbox_lote2 = tk.Checkbutton(janela, text="Incluir Lote 2", variable=checkbox_lote2_var)
 checkbox_lote2.grid(row=12, column=0)
 
-label_nfsal2 = tk.Label(janela, text="NF do SAL:")
+label_nfsal2 = tk.Label(janela, text="NF do produto:")
 label_nfsal2.grid(row=13, column=0)
 
 entry_nfsal2 = tk.Entry(janela)
@@ -508,7 +517,7 @@ checkbox_lote3_var = tk.IntVar()
 checkbox_lote3 = tk.Checkbutton(janela, text="Incluir Lote 3", variable=checkbox_lote3_var)
 checkbox_lote3.grid(row=14, column=0)
 
-label_nfsal3 = tk.Label(janela, text="NF do SAL:")
+label_nfsal3 = tk.Label(janela, text="NF do produto:")
 label_nfsal3.grid(row=15, column=0)
 
 entry_nfsal3 = tk.Entry(janela)
