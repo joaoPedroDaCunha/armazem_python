@@ -287,11 +287,11 @@ def salvar_dados():
 
 def imprimirespelho():
     try:
-        # Obtém o caminho da pasta local onde o script está sendo executado
         caminho_local = os.path.dirname(os.path.abspath(__file__))
+        arquivo_excel = os.path.join(caminho_local,'dados.xlsx')
 
-        # Substitua 'dados.xlsx' pelo nome do seu arquivo Excel
-        arquivo_excel = os.path.join(caminho_local, 'dados.xlsx')
+        # O arquivo PDF será salvo no mesmo diretório do arquivo Excel
+        arquivo_pdf = os.path.join(os.path.dirname(os.path.abspath(arquivo_excel)), 'tabela_formatada.pdf')
 
         # Substitua 'Nome_da_Tabela' pelo nome da tabela que você deseja ler
         nome_tabela = 'Descarga do Sal'
@@ -310,11 +310,20 @@ def imprimirespelho():
         wb = excel.Workbooks.Open(arquivo_excel)
         ws = wb.Worksheets(nome_tabela)
 
+        # Remove as margens
+        ws.PageSetup.LeftMargin = 0
+        ws.PageSetup.RightMargin = 0
+        ws.PageSetup.TopMargin = 0
+        ws.PageSetup.BottomMargin = 0
+
+        # Ajusta a escala para 95%
+        ws.PageSetup.Zoom = 95  # Define a escala para 95%
+
         # Salva o arquivo Excel para garantir que as configurações de impressão sejam aplicadas
         wb.Save()
 
         # Exporta a planilha como PDF
-        pdf_path = os.path.join(caminho_local, 'tabela_formatada.pdf')
+        pdf_path = os.path.join(os.path.dirname(os.path.abspath(arquivo_excel)), 'tabela_formatada.pdf')
         ws.ExportAsFixedFormat(0, pdf_path)
 
         wb.Close()
@@ -596,7 +605,7 @@ botao_imprimir.grid(row=16, columnspan=9)
 botao_limpar = tk.Button(janela,text="Limpar informações",command=limpar)
 botao_limpar.grid(row=1, column=8)
 
-botao_programaçao = tk.Button(janela,text="Pramação txt",command=txtprogramação)
+botao_programaçao = tk.Button(janela,text="Programação txt",command=txtprogramação)
 botao_programaçao.grid(row=16, column=8)
 
 
