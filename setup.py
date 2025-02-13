@@ -9,7 +9,7 @@ setup(
     executables=executables,
     options={
         "build_exe": {
-            "include_files": ["print.py"]
+            "include_files": ["print.py","dados.xlsx"]
         }
     }
 )
