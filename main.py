@@ -2,12 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 import pandas as pd
-import win32com.client as win32
-import win32print
-import win32api
 import os
 import time
-import openpyxl as ox
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from print import imprimirespelho
