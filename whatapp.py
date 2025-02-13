@@ -1,11 +1,19 @@
-import os
+# txtProgramacao.py
 
-# Abre (ou cria) o arquivo txt em modo de escrita (write mode)
-with open('meuarquivo.txt', 'w') as arquivo:
-    # Escreve uma linha no arquivo
-    arquivo.write('kkkkkkkkkkkkkkkkkkkkkkkkkkk\n')
+def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, prod, carga, nf1, peso1, nf2=None, peso2=None, nf3=None, peso3=None):
+    try:
+        with open('meuarquivo.txt', 'w') as arquivo:
+            if nf2 is None and nf3 is None:
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod} {carga} {trans}\n')
+            elif nf3 is None:
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1 + peso2} {placa} {tipo} {prod} {carga} {trans}\n')
+            else:
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1 + peso2 + peso3} {placa} {tipo} {prod} {carga} {trans}\n')
 
-print('Texto escrito com sucesso!')
-
-# Abre o arquivo txt automaticamente no editor de texto padrão do sistema
-os.startfile('meuarquivo.txt')
+        print('Texto escrito com sucesso!')
+        import os  # Importe os dentro da função, se não for usar em outro lugar
+        os.startfile('meuarquivo.txt')
+    except Exception as e:
+        print(f"Ocorreu um erro: {e}") # Imprime o erro para ajudar na depuração.
+        # Aqui você pode retornar o erro para ser tratado em main.py, se necessário.
+        return f"Erro: {e}" # Exemplo: retorna uma string com a mensagem de erro.
