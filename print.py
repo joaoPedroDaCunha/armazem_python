@@ -5,11 +5,22 @@ import openpyxl as ox
 import win32print
 import win32api
 from tkinter import messagebox
+import sys
+
+def resource_path(relative_path):
+    """ Get the absolute path to the resource, works for both development and PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def imprimirespelho():
     try:
-        caminho_local = os.path.dirname(os.path.abspath(__file__))
-        arquivo_excel = os.path.join(caminho_local,'dados.xlsx')
+        caminho_local = resource_path('dados.xlsx')
+        arquivo_excel = os.path.join(caminho_local)
 
         # O arquivo PDF será salvo no mesmo diretório do arquivo Excel
         arquivo_pdf = os.path.join(os.path.dirname(os.path.abspath(arquivo_excel)), 'tabela_formatada.pdf')
