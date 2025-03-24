@@ -316,7 +316,7 @@ def txtprogramação():
             if checkbox_lote2_var.get() == 1 and checkbox_lote3_var.get() == 0 :
                 arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1+peso2} {placa} {tipo} {prod} {carga} {trans}\n')
             if checkbox_lote2_var.get() == 1 and checkbox_lote3_var.get() == 1 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1} {placa+peso2+peso3} {tipo} {prod} {carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1+peso2+peso3} {placa} {tipo} {prod} {carga} {trans}\n')
 
         print('Texto escrito com sucesso!')
 
