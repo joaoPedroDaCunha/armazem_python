@@ -7,6 +7,7 @@ import time
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from print import imprimirespelho
+from whatapp import txtprogramação as txt
 
 # Função para salvar dados na planilha
 def salvar_dados():
@@ -326,6 +327,9 @@ def txtprogramação():
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
+def prog():
+    txt(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"))
+
 def limpar():
     try:
         entry_date.delete(0,tk.END)
@@ -541,7 +545,7 @@ botao_imprimir.grid(row=16, columnspan=9)
 botao_limpar = tk.Button(janela,text="Limpar informações",command=limpar)
 botao_limpar.grid(row=1, column=8)
 
-botao_programaçao = tk.Button(janela,text="Programação txt",command=txtprogramação)
+botao_programaçao = tk.Button(janela,text="Programação txt",command=prog)
 botao_programaçao.grid(row=16, column=8)
 
 

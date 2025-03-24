@@ -4,11 +4,11 @@ def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, pr
     try:
         with open('meuarquivo.txt', 'w') as arquivo:
             if nf2 is None and nf3 is None:
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod} {carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {int(peso1)} {placa} {tipo} {prod} {carga} {trans}\n')
             elif nf3 is None:
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1 + peso2} {placa} {tipo} {prod} {carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {int(peso1 + peso2)} {placa} {tipo} {prod} {carga} {trans}\n')
             else:
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1 + peso2 + peso3} {placa} {tipo} {prod} {carga} {trans}\n')
+                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {int(peso1 + peso2 + peso3)} {placa} {tipo} {prod} {carga} {trans}\n')
 
         print('Texto escrito com sucesso!')
         import os  # Importe os dentro da função, se não for usar em outro lugar
