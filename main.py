@@ -284,51 +284,12 @@ def salvar_dados():
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 
-def txtprogramação():
-    try:
-        date = entry_date.get()
-        horario = entry_horario.get()
-        nome = entry_nome.get()
-        telefone = entry_telefone.get()
-        placa = entry_placa.get()
-        tipo = entry_tipo.get()
-        trans = entry_trans.get()
-        forn = combobox_forn.get()
-        prod = combobox_prod.get()
-        carga = combobox_carga.get()
-
-        # Dados do lote 1
-        nf1 = entry_nfsal1.get()
-        peso1 = int(entry_peso1.get())
-
-        if checkbox_lote2_var.get() == 1:
-            nf2 = entry_nfsal2.get()
-            peso2 = int(entry_peso2.get())
-
-        # Dados do lote 3
-        if checkbox_lote3_var.get() == 1:
-            nf3 = entry_nfsal3.get()
-            peso3 = int(entry_peso3.get())
-            # Abre (ou cria) o arquivo txt em modo de escrita (write mode)
-        with open('meuarquivo.txt', 'w') as arquivo:
-            # Escreve uma linha no arquivo
-            if checkbox_lote2_var.get() == 0 and checkbox_lote3_var.get() == 0 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod} {carga} {trans}\n')
-            if checkbox_lote2_var.get() == 1 and checkbox_lote3_var.get() == 0 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1+peso2} {placa} {tipo} {prod} {carga} {trans}\n')
-            if checkbox_lote2_var.get() == 1 and checkbox_lote3_var.get() == 1 :
-                arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1+peso2+peso3} {placa} {tipo} {prod} {carga} {trans}\n')
-
-        print('Texto escrito com sucesso!')
-
-        time.sleep(3)
-        # Abre o arquivo txt automaticamente no editor de texto padrão do sistema
-        os.startfile('meuarquivo.txt')
-    except Exception as e:
-        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def prog():
-    txt(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"))
+    try:
+        txt(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"),checkbox_lote2_var.get(),checkbox_lote3_var.get())
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def limpar():
     try:
