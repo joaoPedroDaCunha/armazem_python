@@ -4,7 +4,7 @@ import os
 def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, prod, carga, nf1, peso1, nf2=None, peso2=None, nf3=None, peso3=None, checkbox2=None ,checkbox3=None):
     try:
         with open('meuarquivo.txt', 'w') as arquivo:
-            # Escreve uma linha no arquivo
+
             if checkbox2 == 0 and checkbox3 == 0 :
                 arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod} {carga} {trans}\n')
             if checkbox2 == 1 and checkbox3 == 0 :
@@ -14,8 +14,7 @@ def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, pr
 
         print('Texto escrito com sucesso!')
 
-        time.sleep(3)
-        # Abre o arquivo txt automaticamente no editor de texto padrão do sistema
+        time.sleep(1)
         os.startfile('meuarquivo.txt')
     except Exception as e:
         print(e)

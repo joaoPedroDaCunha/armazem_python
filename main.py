@@ -3,287 +3,50 @@ from tkinter import messagebox
 from tkinter import ttk
 import pandas as pd
 import os
-import time
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from print import imprimirespelho
-from whatapp import txtprogramação as txt
+from programacao import txtprogramação as txt
+from salvar_dados import salvar_dados as salvar
 
-# Função para salvar dados na planilha
-def salvar_dados():
+def save():
     try:
-        date = entry_date.get()
-        horario = entry_horario.get()
-        nome = entry_nome.get()
-        telefone = entry_telefone.get()
-        placa = entry_placa.get()
-        tipo = entry_tipo.get()
-        trans = entry_trans.get()
-        forn = combobox_forn.get()
-        prod = combobox_prod.get()
-        carga = combobox_carga.get()
-        val = entry_val.get()
-
-        # Dados do lote 1
-        nf1 = entry_nfsal1.get()
-        nfpalete1 = entry_nfpalete1.get()
-        qtd1 = int(entry_qtdpalete1.get())
-        lote1 = entry_lotesal1.get()
-        peso1 = int(entry_peso1.get())
-
-        # Dados do lote 2
-        if checkbox_lote2_var.get() == 1:
-            nf2 = entry_nfsal2.get()
-            nfpalete2 = entry_nfpalete2.get()
-            qtd2 = int(entry_qtdpalete2.get())
-            lote2 = entry_lotesal2.get()
-            peso2 = int(entry_peso2.get())
-
-        # Dados do lote 3
-        if checkbox_lote3_var.get() == 1:
-            nf3 = entry_nfsal3.get()
-            nfpalete3 = entry_nfpalete3.get()
-            qtd3 = int(entry_qtdpalete3.get())
-            lote3 = entry_lotesal3.get()
-            peso3 = int(entry_peso3.get())
-
-        # Verifica se os campos estão preenchidos
-        if date and horario and nome and telefone and placa and tipo and trans and forn and carga and prod and nf1 and lote1 and peso1:
-            # Cria dicionário com os dados principais
-            dados_programacao = {
-                'Data de Entrada': [date], 
-                'Horario de entrada': [horario], 
-                'Nome do motorista': [nome],
-                'Telefone': [telefone],
-                'NF': [nf1],
-                'Fornecedor': [forn],
-                'Peso total': [peso1],
-                'Placa': [placa],
-                'Tipo de veiculo': [tipo],
-                'Tipo do produto': [prod + " " + carga],
-                'Transportadora': [trans]
-            }
-
-            # Converte o dicionário em DataFrame
-            df_programacao = pd.DataFrame(dados_programacao)
-
-            # Cria lista com dados do primeiro lote
-            dados_planilha = [
-                {'Movimento': "ENTRADA", 'EMISSÃO NF': date, 'Placa': placa, 'Tipo de veiculo': tipo, 'Transportadora': trans, 'Material': prod, 'Tipo de Carga': carga, 'Fornecedor': forn, 'NF fornecedor': nf1, 'NF Palete': nfpalete1, 'QT NF palete': qtd1, 'Lote do fornecedor': lote1, 'Validade': val, 'Peso': peso1}
-            ]
-
-            # Converte a lista em DataFrame
-            df_planilha = pd.DataFrame(dados_planilha)
-
-            # Verifica se o lote 2 deve ser incluído
-            if checkbox_lote2_var.get() == 1:
-                if nf2 and lote2 and peso2:
-                    df_planilha = pd.concat([df_planilha, pd.DataFrame([{'Movimento': "ENTRADA", 'EMISSÃO NF': date, 'Placa': placa, 'Tipo de veiculo': tipo, 'Transportadora': trans, 'Material': prod, 'Tipo de Carga': carga, 'Fornecedor': forn, 'NF fornecedor': nf2, 'NF Palete': nfpalete2, 'QT NF palete': qtd2, 'Lote do fornecedor': lote2, 'Validade': val, 'Peso': peso2}])], ignore_index=True)
-
-            # Verifica se o lote 3 deve ser incluído
-            if checkbox_lote3_var.get() == 1:
-                if nf3 and lote3 and peso3:
-                    df_planilha = pd.concat([df_planilha, pd.DataFrame([{'Movimento': "ENTRADA", 'EMISSÃO NF': date, 'Placa': placa, 'Tipo de veiculo': tipo, 'Transportadora': trans, 'Material': prod, 'Tipo de Carga': carga, 'Fornecedor': forn, 'NF fornecedor': nf3, 'NF Palete': nfpalete3, 'QT NF palete': qtd3, 'Lote do fornecedor': lote3, 'Validade': val, 'Peso': peso3}])], ignore_index=True)
-
-            # Verifica se o arquivo já existe
-            if os.path.exists('dados.xlsx'):
-                # Abre o arquivo existente e adiciona os dados
-                wb = load_workbook('dados.xlsx')
-
-                # Adiciona os dados à planilha de programação
-                if 'Programacao' not in wb.sheetnames:
-                    ws_programacao = wb.create_sheet("Programacao")
-                else:
-                    ws_programacao = wb['Programacao']
-
-                for row in dataframe_to_rows(df_programacao, index=False, header=False):
-                    ws_programacao.append(row)
-
-                # Adiciona os dados à planilha de lote
-                if 'Planilha' not in wb.sheetnames:
-                    ws_planilha = wb.create_sheet("Planilha")
-                else:
-                    ws_planilha = wb['Planilha']
-
-                for row in dataframe_to_rows(df_planilha, index=False, header=False):
-                    ws_planilha.append(row)
-
-                # Adiciona os dados à planilha de descarga de sal (exemplo)
-                if 'Descarga do Sal' not in wb.sheetnames:
-                    ws_descarga_sal = wb.create_sheet("Descarga do Sal")
-                else:
-                    ws_descarga_sal = wb['Descarga do Sal']
-                    ws_descarga_sal['D8'] = date
-                    ws_descarga_sal['K8'] = horario
-                    ws_descarga_sal['D10'] = nome
-                    ws_descarga_sal['D12'] = telefone
-                    ws_descarga_sal['D14'] = tipo
-                    ws_descarga_sal['K14'] = placa
-                    ws_descarga_sal['D16'] = trans
-                    ws_descarga_sal['D18'] = forn
-                    ws_descarga_sal['M18'] = carga
-                    ws_descarga_sal['D20'] = nf1
-                    ws_descarga_sal['K20'] = nfpalete1
-                    ws_descarga_sal['P20'] = peso1
-                    if checkbox_lote2_var.get() == 1:
-                        if nf1 == nf2 :
-                            ws_descarga_sal['D22'] = " "
-                            ws_descarga_sal['K22'] = " "
-                            ws_descarga_sal['P22'] = " "
-                            ws_descarga_sal['P20'] = peso1+peso2
-                        else :
-                            ws_descarga_sal['D22'] = nf2
-                            ws_descarga_sal['K22'] = nfpalete2
-                            ws_descarga_sal['P22'] = peso2
-                    else :
-                        ws_descarga_sal['D22'] = " "
-                        ws_descarga_sal['K22'] = " "
-                        ws_descarga_sal['P22'] = " "
-                    if checkbox_lote3_var.get() == 1:
-                        if nf1 == nf3 and nf1 == nf2:
-                            ws_descarga_sal['D24'] = " "
-                            ws_descarga_sal['K24'] = " "
-                            ws_descarga_sal['P24'] = " "
-                            ws_descarga_sal['P20'] = peso1+peso2+peso3
-                        else:
-                            ws_descarga_sal['D24'] = nf3
-                            ws_descarga_sal['K24'] = nfpalete3
-                            ws_descarga_sal['P24'] = peso3
-                    else :
-                        ws_descarga_sal['D24'] = " "
-                        ws_descarga_sal['K24'] = " "
-                        ws_descarga_sal['P24'] = " "
-                    ws_descarga_sal['D26'] = prod
-                    ws_descarga_sal['L26'] = val
-                    ws_descarga_sal['D28'] = lote1
-                    ws_descarga_sal['H28'] = nf1
-                    ws_descarga_sal['K28'] = peso1
-                    ws_descarga_sal['O28'] = qtd1
-                    if checkbox_lote2_var.get() == 1:
-                        ws_descarga_sal['D30'] = lote2
-                        ws_descarga_sal['H30'] = nf2
-                        ws_descarga_sal['K30'] = peso2
-                        ws_descarga_sal['O30'] = qtd2
-                    else :
-                        ws_descarga_sal['D30'] = " "
-                        ws_descarga_sal['H30'] = " "
-                        ws_descarga_sal['K30'] = " "
-                        ws_descarga_sal['O30'] = " "
-                    if checkbox_lote3_var.get() == 1:
-                        ws_descarga_sal['D32'] = lote3
-                        ws_descarga_sal['H32'] = nf3
-                        ws_descarga_sal['K32'] = peso3
-                        ws_descarga_sal['O32'] = qtd3
-                    else :
-                        ws_descarga_sal['D32'] = " "
-                        ws_descarga_sal['H32'] = " "
-                        ws_descarga_sal['K32'] = " "
-                        ws_descarga_sal['O32'] = " "
-
-
-            else:
-                # Se o arquivo não existir, cria um novo
-                wb = Workbook()
-
-                # Cria a planilha de Programacao
-                ws_programacao = wb.active
-                ws_programacao.title = "Programacao"
-                for row in dataframe_to_rows(df_programacao, index=False, header=True):
-                    ws_programacao.append(row)
-
-                # Cria a planilha de Planilha
-                ws_planilha = wb.create_sheet("Planilha")
-                for row in dataframe_to_rows(df_planilha, index=False, header=True):
-                    ws_planilha.append(row)
-
-                # Cria a planilha de Descarga do Sal
-                ws_descarga_sal = wb.create_sheet("Descarga do Sal")
-                ws_descarga_sal = wb['Descarga do Sal']
-                ws_descarga_sal['D8'] = date
-                ws_descarga_sal['K8'] = horario
-                ws_descarga_sal['D10'] = nome
-                ws_descarga_sal['D12'] = telefone
-                ws_descarga_sal['D14'] = tipo
-                ws_descarga_sal['K14'] = placa
-                ws_descarga_sal['D16'] = trans
-                ws_descarga_sal['D18'] = forn
-                ws_descarga_sal['M18'] = carga
-                ws_descarga_sal['D20'] = nf1
-                ws_descarga_sal['K20'] = nfpalete1
-                ws_descarga_sal['P20'] = peso1
-                ws_descarga_sal['D20'] = nf1
-                ws_descarga_sal['K20'] = nfpalete1
-                ws_descarga_sal['P20'] = peso1
-                if checkbox_lote2_var.get() == 1:
-                    if nf1 == nf2 :
-                        ws_descarga_sal['D22'] = " "
-                        ws_descarga_sal['K22'] = " "
-                        ws_descarga_sal['P22'] = " "
-                        ws_descarga_sal['P20'] = peso1+peso2
-                    else :
-                        ws_descarga_sal['D22'] = nf2
-                        ws_descarga_sal['K22'] = nfpalete2
-                        ws_descarga_sal['P22'] = peso2
-                else :
-                    ws_descarga_sal['D22'] = " "
-                    ws_descarga_sal['K22'] = " "
-                    ws_descarga_sal['P22'] = " "
-                if checkbox_lote3_var.get() == 1:
-                    if nf1 == nf3 and nf1 == nf2:
-                        ws_descarga_sal['D24'] = " "
-                        ws_descarga_sal['K24'] = " "
-                        ws_descarga_sal['P24'] = " "
-                        ws_descarga_sal['P20'] = peso1+peso2+peso3
-                    else:
-                        ws_descarga_sal['D24'] = nf3
-                        ws_descarga_sal['K24'] = nfpalete3
-                        ws_descarga_sal['P24'] = peso3
-                else :
-                    ws_descarga_sal['D24'] = " "
-                    ws_descarga_sal['K24'] = " "
-                    ws_descarga_sal['P24'] = " "
-                ws_descarga_sal['D26'] = prod
-                ws_descarga_sal['L26'] = val
-                ws_descarga_sal['D28'] = lote1
-                ws_descarga_sal['H28'] = nf1
-                ws_descarga_sal['K28'] = peso1
-                ws_descarga_sal['O28'] = qtd1
-                if checkbox_lote2_var.get() == 1:
-                    ws_descarga_sal['D30'] = lote2
-                    ws_descarga_sal['H30'] = nf2
-                    ws_descarga_sal['K30'] = peso2
-                    ws_descarga_sal['O30'] = qtd2
-                else :
-                    ws_descarga_sal['D30'] = " "
-                    ws_descarga_sal['H30'] = " "
-                    ws_descarga_sal['K30'] = " "
-                    ws_descarga_sal['O30'] = " "
-                if checkbox_lote3_var.get() == 1:
-                    ws_descarga_sal['D32'] = lote3
-                    ws_descarga_sal['H32'] = nf3
-                    ws_descarga_sal['K32'] = peso3
-                    ws_descarga_sal['O32'] = qtd3
-                else :
-                    ws_descarga_sal['D32'] = " "
-                    ws_descarga_sal['H32'] = " "
-                    ws_descarga_sal['K32'] = " "
-                    ws_descarga_sal['O32'] = " "
-            
-
-            # Salva a planilha
-            wb.save('dados.xlsx')
-            messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
-
-        else:
-            messagebox.showerror("Erro", "Preencha todos os campos obrigatórios.")
+        salvar(
+        entry_date.get(),  # Correto: o método .get() é chamado no widget antes de usar o valor
+        entry_horario.get(),
+        entry_nome.get(),
+        entry_telefone.get(),
+        entry_placa.get(),
+        entry_tipo.get(),
+        entry_trans.get(),
+        combobox_forn.get(),
+        combobox_prod.get(),
+        combobox_carga.get(),
+        entry_val.get(),
+        entry_nfsal1.get(),
+        entry_nfpalete1.get(),
+        int(entry_qtdpalete1.get() or "0"),  # Correto: .get() chamado antes de int()
+        entry_lotesal1.get(),
+        int(entry_peso1.get() or "0"),       # Correto: .get() chamado antes de int()
+        checkbox_lote2_var,           # Correto: chamada direta no IntVar
+        entry_nfsal2.get(),
+        entry_nfpalete2.get(),
+        int(entry_qtdpalete2.get() or "0"),  # Correto: .get() chamado antes de int()
+        entry_lotesal2.get(),
+        int(entry_peso2.get() or "0"),       # Correto: .get() chamado antes de int()
+        checkbox_lote3_var,           # Correto: chamada direta no IntVar
+        entry_nfsal3.get(),
+        entry_nfpalete3.get(),
+        int(entry_qtdpalete3.get() or "0"),  # Correto: .get() chamado antes de int()
+        entry_lotesal3.get(),
+        int(entry_peso3.get() or "0")        # Correto: .get() chamado antes de int()
+        )
     except ValueError as e:
         messagebox.showerror("Erro de valor", "Nos campos de QTD e Peso devese colocar exclusivamente numeros")
     except PermissionError as e:
         messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
-
-
 
 def prog():
     try:
@@ -497,7 +260,7 @@ entry_peso3.grid(row=15, column=9)
 
 
 # Cria o botão para salvar
-botao_salvar = tk.Button(janela, text="Salvar", command=salvar_dados)
+botao_salvar = tk.Button(janela, text="Salvar", command=save)
 botao_salvar.grid(row=16, columnspan=5)
 
 botao_imprimir = tk.Button(janela,text="Imprimir Espelho",command=imprimirespelho)
