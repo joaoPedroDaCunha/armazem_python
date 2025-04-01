@@ -244,7 +244,7 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
 def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem1,nfpaleteEmb1,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1,contUnid1,lotef1,pesoEmb1,nfembalagem2,nfpaleteEmb2,codprod2,qtdpaleteEmb2,valEmb2,nomeprod2,contUnid2,lotef2,pesoEmb2
               ,nfembalagem3,nfpaleteEmb3,codprod3,qtdpaleteEmb3,valEmb3,nomeprod3,contUnid3,lotef3,pesoEmb3,nfembalagem4,nfpaleteEmb4,codprod4,qtdpaleteEmb4,valEmb4,nomeprod4,contUnid4,lotef4,pesoEmb4
               ,nfembalagem5,nfpaleteEmb5,codprod5,qtdpaleteEmb5,valEmb5,nomeprod5,contUnid5,lotef5,pesoEmb5,nfembalagem6,nfpaleteEmb6,codprod6,qtdpaleteEmb6,valEmb6,nomeprod6,contUnid6,lotef6,pesoEmb6):
-    try:
+    #try:
         if date and horario and nome and telefone and placa and tipo and trans and forn:
             dados_EmbPlan = {'Movimento':['ENTRADA'],'EMISSÃO NF':[date],'PLACA':[placa],'TRANSPORTADOR':[trans],'MATERIAL':[nomeprod1],'TIPO DE PRODUTO':['EMBALAGEM'],'FORNECEDOR':[forn],'NF FORNCEDOR':[nfembalagem1],' QTDA ITENS ':[contUnid1],'QTD PALLET':[qtdpaleteEmb1],'NF PALLET':[nfpaleteEmb1],'LOTE 1 FORNECEDOR':[lotef1],'VALIDADE':[valEmb1],'PESO (KG)':[pesoEmb1]}
             df_dados_EmbPlan = pd.DataFrame(dados_EmbPlan)
@@ -273,13 +273,114 @@ def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfemb
                 
                 for row in dataframe_to_rows(df_dados_EmbPlan, index=False, header=False):
                     ws_dados_EmbPlan.append(row)
+                
+                if 'Descarga Embalagem' not in wb.sheetnames:
+                    ws_Descarga_Embalagem  = wb.create_sheet("Descarga Embalagem")
+                else:
+                    ws_Descarga_Embalagem = wb['Descarga Embalagem']
+                    ws_Descarga_Embalagem['D8']=date
+                    ws_Descarga_Embalagem['K8']=horario
+                    ws_Descarga_Embalagem['R8']=placa
+                    ws_Descarga_Embalagem['D10']=nome
+                    ws_Descarga_Embalagem['R10']=telefone
+                    ws_Descarga_Embalagem['D12']=tipo
+                    ws_Descarga_Embalagem['O12']=trans
+                    ws_Descarga_Embalagem['D14']=forn
+                    ws_Descarga_Embalagem['R14']=qtdtotalEmb
+                    ws_Descarga_Embalagem['D17']=nfembalagem1
+                    ws_Descarga_Embalagem['D19']=codprod1
+                    ws_Descarga_Embalagem['D21']=qtdpaleteEmb1
+                    ws_Descarga_Embalagem['D23']=valEmb1
+                    ws_Descarga_Embalagem['D25']=nomeprod1
+                    ws_Descarga_Embalagem['D27']=contUnid1
+                    ws_Descarga_Embalagem['D29']=lotef1
+                    if nfembalagem2 != None:
+                        ws_Descarga_Embalagem['E17']=nfembalagem2
+                        ws_Descarga_Embalagem['E19']=codprod2
+                        ws_Descarga_Embalagem['E21']=qtdpaleteEmb2
+                        ws_Descarga_Embalagem['E23']=valEmb2
+                        ws_Descarga_Embalagem['E25']=nomeprod2
+                        ws_Descarga_Embalagem['E27']=contUnid2
+                        ws_Descarga_Embalagem['E29']=lotef2
+                    else:
+                        ws_Descarga_Embalagem['E17']=" "
+                        ws_Descarga_Embalagem['E19']=" "
+                        ws_Descarga_Embalagem['E21']=" "
+                        ws_Descarga_Embalagem['E23']=" "
+                        ws_Descarga_Embalagem['E25']=" "
+                        ws_Descarga_Embalagem['E27']=" "
+                        ws_Descarga_Embalagem['E29']=" "
+                    if nfembalagem3 != None:
+                        ws_Descarga_Embalagem['J17']=nfembalagem3
+                        ws_Descarga_Embalagem['J19']=codprod3
+                        ws_Descarga_Embalagem['J21']=qtdpaleteEmb3
+                        ws_Descarga_Embalagem['J23']=valEmb3
+                        ws_Descarga_Embalagem['J25']=nomeprod3
+                        ws_Descarga_Embalagem['J27']=contUnid3
+                        ws_Descarga_Embalagem['J29']=lotef3
+                    else:
+                        ws_Descarga_Embalagem['J17']=" "
+                        ws_Descarga_Embalagem['J19']=" "
+                        ws_Descarga_Embalagem['J21']=" "
+                        ws_Descarga_Embalagem['J23']=" "
+                        ws_Descarga_Embalagem['J25']=" "
+                        ws_Descarga_Embalagem['J27']=" "
+                        ws_Descarga_Embalagem['J29']=" "
+                    if nfembalagem4 != None:
+                        ws_Descarga_Embalagem['M17']=nfembalagem4
+                        ws_Descarga_Embalagem['M19']=codprod4
+                        ws_Descarga_Embalagem['M21']=qtdpaleteEmb4
+                        ws_Descarga_Embalagem['M23']=valEmb4
+                        ws_Descarga_Embalagem['M25']=nomeprod4
+                        ws_Descarga_Embalagem['M27']=contUnid4
+                        ws_Descarga_Embalagem['M29']=lotef4
+                    else:
+                        ws_Descarga_Embalagem['M17']=" "
+                        ws_Descarga_Embalagem['M19']=" "
+                        ws_Descarga_Embalagem['M21']=" "
+                        ws_Descarga_Embalagem['M23']=" "
+                        ws_Descarga_Embalagem['M25']=" "
+                        ws_Descarga_Embalagem['M27']=" "
+                        ws_Descarga_Embalagem['M29']=" "
+                    if nfembalagem5 != None:
+                        ws_Descarga_Embalagem['P17']=nfembalagem5
+                        ws_Descarga_Embalagem['P19']=codprod5
+                        ws_Descarga_Embalagem['P21']=qtdpaleteEmb5
+                        ws_Descarga_Embalagem['P23']=valEmb5
+                        ws_Descarga_Embalagem['P25']=nomeprod5
+                        ws_Descarga_Embalagem['P27']=contUnid5
+                        ws_Descarga_Embalagem['P29']=lotef5
+                    else:
+                        ws_Descarga_Embalagem['P17']=" "
+                        ws_Descarga_Embalagem['P19']=" "
+                        ws_Descarga_Embalagem['P21']=" "
+                        ws_Descarga_Embalagem['P23']=" "
+                        ws_Descarga_Embalagem['P25']=" "
+                        ws_Descarga_Embalagem['P27']=" "
+                        ws_Descarga_Embalagem['P29']=" "
+                    if nfembalagem6 != None:
+                        ws_Descarga_Embalagem['R17']=nfembalagem6
+                        ws_Descarga_Embalagem['R19']=codprod6
+                        ws_Descarga_Embalagem['R21']=qtdpaleteEmb6
+                        ws_Descarga_Embalagem['R23']=valEmb6
+                        ws_Descarga_Embalagem['R25']=nomeprod6
+                        ws_Descarga_Embalagem['R27']=contUnid6
+                        ws_Descarga_Embalagem['R29']=lotef6
+                    else:
+                        ws_Descarga_Embalagem['R17']=" "
+                        ws_Descarga_Embalagem['R19']=" "
+                        ws_Descarga_Embalagem['R21']=" "
+                        ws_Descarga_Embalagem['R23']=" "
+                        ws_Descarga_Embalagem['R25']=" "
+                        ws_Descarga_Embalagem['R27']=" "
+                        ws_Descarga_Embalagem['R29']=" "
             else:
                 messagebox.showerror("Erro","planilha não existe")
             wb.save('dados.xlsx')
             messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
         else:
             messagebox.showerror("Erro","preencha as informações")
-    except Exception as e:
-        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
-    except PermissionError as e:
-        messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
+    #except Exception as e:
+       # messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+    #except PermissionError as e:
+        #messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
