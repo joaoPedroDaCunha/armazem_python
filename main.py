@@ -52,7 +52,11 @@ def save():
 def saveEmb():
     salvarEmb(entry_dateEmb.get(),entry_horarioEmb.get(),entry_nomeEmb.get(),entry_telefoneEmb.get(),entry_placaEmb.get(),entry_tipoEmb.get(),entry_transEmb.get(),combobox_fornEmb.get(),entry_qtdtotalEmb.get()
               ,entry_nfembalagem1.get(),entry_nfpaleteEmb1.get(),entry_codprod1.get(),entry_qtdpaleteEmb1.get(),entry_valEmb1.get(),combobox_nomeprod1.get(),entry_contUnid1.get(),entry_lotef1.get(),entry_pesoEmb1.get()
-              ,entry_nfembalagem2.get() or None,entry_nfpaleteEmb1.get() or None,entry_codprod1.get() or None,entry_qtdpaleteEmb1.get() or None,entry_valEmb1.get() or None,combobox_nomeprod1.get() or None,entry_contUnid1.get() or None,entry_lotef1.get() or None,entry_pesoEmb1.get() or None
+              ,entry_nfembalagem2.get() or None,entry_nfpaleteEmb2.get() or None,entry_codprod2.get() or None,entry_qtdpaleteEmb2.get() or None,entry_valEmb2.get() or None,combobox_nomeprod2.get() or None,entry_contUnid2.get() or None,entry_lotef2.get() or None,entry_pesoEmb2.get() or None
+              ,entry_nfembalagem3.get() or None,entry_nfpaleteEmb3.get() or None,entry_codprod3.get() or None,entry_qtdpaleteEmb3.get() or None,entry_valEmb3.get() or None,combobox_nomeprod3.get() or None,entry_contUnid3.get() or None,entry_lotef3.get() or None,entry_pesoEmb3.get() or None
+              ,entry_nfembalagem4.get() or None,entry_nfpaleteEmb4.get() or None,entry_codprod4.get() or None,entry_qtdpaleteEmb4.get() or None,entry_valEmb4.get() or None,combobox_nomeprod4.get() or None,entry_contUnid4.get() or None,entry_lotef4.get() or None,entry_pesoEmb4.get() or None
+              ,entry_nfembalagem5.get() or None,entry_nfpaleteEmb5.get() or None,entry_codprod5.get() or None,entry_qtdpaleteEmb5.get() or None,entry_valEmb5.get() or None,combobox_nomeprod5.get() or None,entry_contUnid5.get() or None,entry_lotef5.get() or None,entry_pesoEmb5.get() or None
+              ,entry_nfembalagem6.get() or None,entry_nfpaleteEmb6.get() or None,entry_codprod6.get() or None,entry_qtdpaleteEmb6.get() or None,entry_valEmb6.get() or None,combobox_nomeprod6.get() or None,entry_contUnid6.get() or None,entry_lotef6.get() or None,entry_pesoEmb6.get() or None
               )
 
 def prog():

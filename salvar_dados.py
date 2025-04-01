@@ -241,11 +241,29 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
-def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem1,nfpaleteEmb1,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1,contUnid1,lotef1,pesoEmb1,nfembalagem2,nfpaleteEmb2,codprod2,qtdpaleteEmb2,valEmb2,nomeprod2,contUnid2,lotef2,pesoEmb2):
+def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem1,nfpaleteEmb1,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1,contUnid1,lotef1,pesoEmb1,nfembalagem2,nfpaleteEmb2,codprod2,qtdpaleteEmb2,valEmb2,nomeprod2,contUnid2,lotef2,pesoEmb2
+              ,nfembalagem3,nfpaleteEmb3,codprod3,qtdpaleteEmb3,valEmb3,nomeprod3,contUnid3,lotef3,pesoEmb3,nfembalagem4,nfpaleteEmb4,codprod4,qtdpaleteEmb4,valEmb4,nomeprod4,contUnid4,lotef4,pesoEmb4
+              ,nfembalagem5,nfpaleteEmb5,codprod5,qtdpaleteEmb5,valEmb5,nomeprod5,contUnid5,lotef5,pesoEmb5,nfembalagem6,nfpaleteEmb6,codprod6,qtdpaleteEmb6,valEmb6,nomeprod6,contUnid6,lotef6,pesoEmb6):
     try:
         if date and horario and nome and telefone and placa and tipo and trans and forn:
             dados_EmbPlan = {'Movimento':['ENTRADA'],'EMISSÃO NF':[date],'PLACA':[placa],'TRANSPORTADOR':[trans],'MATERIAL':[nomeprod1],'TIPO DE PRODUTO':['EMBALAGEM'],'FORNECEDOR':[forn],'NF FORNCEDOR':[nfembalagem1],' QTDA ITENS ':[contUnid1],'QTD PALLET':[qtdpaleteEmb1],'NF PALLET':[nfpaleteEmb1],'LOTE 1 FORNECEDOR':[lotef1],'VALIDADE':[valEmb1],'PESO (KG)':[pesoEmb1]}
             df_dados_EmbPlan = pd.DataFrame(dados_EmbPlan)
+
+            if nfembalagem2 != None:
+                df_dados_EmbPlan = pd.concat([df_dados_EmbPlan,pd.DataFrame([{'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod2,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem2,' QTDA ITENS ':contUnid2,'QTD PALLET':qtdpaleteEmb2,'NF PALLET':nfpaleteEmb2,'LOTE 1 FORNECEDOR':lotef2,'VALIDADE':valEmb2,'PESO (KG)':pesoEmb2}])])
+
+            if nfembalagem3 != None:
+                df_dados_EmbPlan = pd.concat([df_dados_EmbPlan,pd.DataFrame([{'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod3,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem3,' QTDA ITENS ':contUnid3,'QTD PALLET':qtdpaleteEmb3,'NF PALLET':nfpaleteEmb3,'LOTE 1 FORNECEDOR':lotef3,'VALIDADE':valEmb3,'PESO (KG)':pesoEmb3}])])
+
+            if nfembalagem4 != None:
+                df_dados_EmbPlan = pd.concat([df_dados_EmbPlan,pd.DataFrame([{'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod4,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem4,' QTDA ITENS ':contUnid4,'QTD PALLET':qtdpaleteEmb4,'NF PALLET':nfpaleteEmb4,'LOTE 1 FORNECEDOR':lotef4,'VALIDADE':valEmb4,'PESO (KG)':pesoEmb4}])])
+            
+            if nfembalagem5 != None:
+                df_dados_EmbPlan = pd.concat([df_dados_EmbPlan,pd.DataFrame([{'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod5,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem5,' QTDA ITENS ':contUnid5,'QTD PALLET':qtdpaleteEmb5,'NF PALLET':nfpaleteEmb5,'LOTE 1 FORNECEDOR':lotef5,'VALIDADE':valEmb5,'PESO (KG)':pesoEmb5}])])
+            
+            if nfembalagem6 != None:
+                df_dados_EmbPlan = pd.concat([df_dados_EmbPlan,pd.DataFrame([{'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod6,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem6,' QTDA ITENS ':contUnid6,'QTD PALLET':qtdpaleteEmb6,'NF PALLET':nfpaleteEmb6,'LOTE 1 FORNECEDOR':lotef6,'VALIDADE':valEmb6,'PESO (KG)':pesoEmb6}])])
+            
             if os.path.exists('dados.xlsx'):
                 wb = load_workbook('dados.xlsx')
                 if 'Embalagem Panilha' not in wb.sheetnames:
