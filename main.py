@@ -8,7 +8,7 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from print import imprimirespelho
 from programacao import txtprogramação as txt
-from salvar_dados import salvar_dados as salvar
+from salvar_dados import salvar_dados as salvar,salvarEmb
 
 def save():
     try:
@@ -48,6 +48,9 @@ def save():
         messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+
+def saveEmb():
+    salvarEmb(entry_dateEmb.get(),entry_horarioEmb.get(),entry_nomeEmb.get(),entry_telefoneEmb.get(),entry_placaEmb.get(),entry_tipoEmb.get(),entry_transEmb.get(),combobox_fornEmb.get(),entry_qtdtotalEmb.get(),entry_nfembalagem1.get(),entry_nfpaleteEmb1.get(),entry_codprod1.get(),entry_qtdpaleteEmb1.get(),entry_valEmb1.get(),combobox_nomeprod1.get(),entry_contUnid1.get(),entry_lotef1.get(),entry_pesoEmb1.get())
 
 def prog():
     try:
@@ -337,12 +340,12 @@ entry_transEmb.grid(row=6, column=1)
 label_forn = tk.Label(aba2, text="Fornecedor:")
 label_forn.grid(row=7, column=0)
 
-combobox_fornEmb = ttk.Combobox(aba2, values=["NORSAL", "CIMSAL", "CISNE"])
+combobox_fornEmb = ttk.Combobox(aba2, values=[])
 combobox_fornEmb.grid(row=7, column=1)
-combobox_fornEmb.set("Selecione uma opção")
 
 label_qtdtotal = tk.Label(aba2, text="Quantidade total de Paletes")
 label_qtdtotal.grid(row=7, column=3)
+
 entry_qtdtotalEmb = tk.Entry(aba2)
 entry_qtdtotalEmb.grid(row=7,column=4)
 
@@ -355,7 +358,7 @@ label_espaco.grid(row=9)
 label_info1 = tk.Label(aba2, text="Produto 1")
 label_info1.grid(row=9,column=1)
 
-label_nfembalagem = tk.Label(aba2, text="NF")
+label_nfembalagem = tk.Label(aba2, text="NF PRODUTO")
 label_nfembalagem.grid(row=10,column=0)
 
 entry_nfembalagem1 = tk.Entry(aba2)
@@ -364,50 +367,78 @@ entry_nfembalagem1.grid(row=10,column=1)
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=11)
 
-label_codprod = tk.Label(aba2, text="COD. PROD")
-label_codprod.grid(row=12,column=0)
+label_nfpaleteEmb = tk.Label(aba2, text="NF PALLET")
+label_nfpaleteEmb.grid(row=12,column=0)
 
-entry_codprod1 = tk.Entry(aba2)
-entry_codprod1.grid(row=12,column=1)
+entry_nfpaleteEmb1 = tk.Entry(aba2)
+entry_nfpaleteEmb1.grid(row=12,column=1)
 
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=13)
 
-label_qtdpalete = tk.Label(aba2, text="QTA. PALETE")
-label_qtdpalete.grid(row=14,column=0)
+label_codprod = tk.Label(aba2, text="COD. PROD")
+label_codprod.grid(row=14,column=0)
 
-entry_qtdpaleteEmb1 = tk.Entry(aba2)
-entry_qtdpaleteEmb1.grid(row=14,column=1)
+entry_codprod1 = tk.Entry(aba2)
+entry_codprod1.grid(row=14,column=1)
 
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=15)
 
+label_qtdpalete = tk.Label(aba2, text="QTA. PALETE")
+label_qtdpalete.grid(row=16,column=0)
+
+entry_qtdpaleteEmb1 = tk.Entry(aba2)
+entry_qtdpaleteEmb1.grid(row=16,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=18)
+
 label_val = tk.Label(aba2,text="DATA VALIDADE")
-label_val.grid(row=16,column=0)
+label_val.grid(row=19,column=0)
 
 entry_valEmb1 = tk.Entry(aba2)
-entry_valEmb1.grid(row=16,column=1)
+entry_valEmb1.grid(row=19,column=1)
 
 label_espaco = tk.Label(aba2)
-label_espaco.grid(row=17)
+label_espaco.grid(row=20)
 
 label_prod = tk.Label(aba2,text="NOME DO PROD")
-label_prod.grid(row=18,column=0)
+label_prod.grid(row=21,column=0)
 
 combobox_nomeprod1 = ttk.Combobox(aba2,values=[])
-combobox_nomeprod1.grid(row=18,column=1)
+combobox_nomeprod1.grid(row=21,column=1)
 
 label_espaco = tk.Label(aba2)
-label_espaco.grid(row=19)
+label_espaco.grid(row=22)
 
-label_contUnid = tk.Label(aba2)
-label_contUnid
+label_contUnid = tk.Label(aba2, text="QTD. UNIDADE")
+label_contUnid.grid(row=23,column=0)
+
+entry_contUnid1 = tk.Entry(aba2)
+entry_contUnid1.grid(row=23,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=24)
 
 label_lotef = tk.Label(aba2,text="LOTE FORNECEDOR")
-label_lotef.grid(row=20,column=0)
+label_lotef.grid(row=25,column=0)
 
 entry_lotef1 = tk.Entry(aba2)
-entry_lotef1.grid(row=20,column=1)
+entry_lotef1.grid(row=25,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=26)
+
+label_peso = tk.Label(aba2,text="PESO")
+label_peso.grid(row=27,column=0)
+
+entry_pesoEmb1 = tk.Entry(aba2)
+entry_pesoEmb1.grid(row=27,column=1)
+
+botao_salvar = tk.Button(aba2, text="Salvar", command=saveEmb)
+botao_salvar.grid(row=28, columnspan=5)
+
 
 
 # Inicia o loop principal da aplicação

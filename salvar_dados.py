@@ -241,11 +241,24 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
-def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1):
+def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem,nfpaleteEmb1,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1,contUnid1,lotef1,pesoEmb1):
     try:
         if date and horario and nome and telefone and placa and tipo and trans and forn:
-            dados_EmbPlan = {'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod1,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem,' QTDA ITENS ':qtdpaleteEmb1,}
+            dados_EmbPlan = {'Movimento':['ENTRADA'],'EMISSÃO NF':[date],'PLACA':[placa],'TRANSPORTADOR':[trans],'MATERIAL':[nomeprod1],'TIPO DE PRODUTO':['EMBALAGEM'],'FORNECEDOR':[forn],'NF FORNCEDOR':[nfembalagem],' QTDA ITENS ':[contUnid1],'QTD PALLET':[qtdpaleteEmb1],'NF PALLET':[nfpaleteEmb1],'LOTE 1 FORNECEDOR':[lotef1],'VALIDADE':[valEmb1],'PESO (KG)':[pesoEmb1]}
+            df_dados_EmbPlan = pd.DataFrame(dados_EmbPlan)
+            if os.path.exists('dados.xlsx'):
+                wb = load_workbook('dados.xlsx')
+                if 'Embalagem Panilha' not in wb.sheetnames:
+                    ws_dados_EmbPlan = wb.create_sheet("Embalagem Panilha")
+                else:
+                    ws_dados_EmbPlan = wb['Embalagem Panilha']
+                
+                for row in dataframe_to_rows(df_dados_EmbPlan, index=False, header=False):
+                    ws_dados_EmbPlan.append(row)
+            else:
+                messagebox.showerror("Erro","planilha não existe")
+            wb.save('dados.xlsx')
         else:
-            messagebox.showerror("Erro","preença as informações")
+            messagebox.showerror("Erro","preencha as informações")
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
