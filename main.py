@@ -50,7 +50,10 @@ def save():
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def saveEmb():
-    salvarEmb(entry_dateEmb.get(),entry_horarioEmb.get(),entry_nomeEmb.get(),entry_telefoneEmb.get(),entry_placaEmb.get(),entry_tipoEmb.get(),entry_transEmb.get(),combobox_fornEmb.get(),entry_qtdtotalEmb.get(),entry_nfembalagem1.get(),entry_nfpaleteEmb1.get(),entry_codprod1.get(),entry_qtdpaleteEmb1.get(),entry_valEmb1.get(),combobox_nomeprod1.get(),entry_contUnid1.get(),entry_lotef1.get(),entry_pesoEmb1.get())
+    salvarEmb(entry_dateEmb.get(),entry_horarioEmb.get(),entry_nomeEmb.get(),entry_telefoneEmb.get(),entry_placaEmb.get(),entry_tipoEmb.get(),entry_transEmb.get(),combobox_fornEmb.get(),entry_qtdtotalEmb.get()
+              ,entry_nfembalagem1.get(),entry_nfpaleteEmb1.get(),entry_codprod1.get(),entry_qtdpaleteEmb1.get(),entry_valEmb1.get(),combobox_nomeprod1.get(),entry_contUnid1.get(),entry_lotef1.get(),entry_pesoEmb1.get()
+              ,entry_nfembalagem2.get() or None,entry_nfpaleteEmb1.get() or None,entry_codprod1.get() or None,entry_qtdpaleteEmb1.get() or None,entry_valEmb1.get() or None,combobox_nomeprod1.get() or None,entry_contUnid1.get() or None,entry_lotef1.get() or None,entry_pesoEmb1.get() or None
+              )
 
 def prog():
     try:
@@ -352,17 +355,44 @@ entry_qtdtotalEmb.grid(row=7,column=4)
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=8)
 
-label_espaco = tk.Label(aba2)
-label_espaco.grid(row=9)
-
 label_info1 = tk.Label(aba2, text="Produto 1")
 label_info1.grid(row=9,column=1)
+
+label_info2 = tk.Label(aba2, text="Produto 2")
+label_info2.grid(row=9,column=2)
+
+label_info3 = tk.Label(aba2, text="Produto 3")
+label_info3.grid(row=9,column=3)
+
+label_info4 = tk.Label(aba2, text="Produto 4")
+label_info4.grid(row=9,column=4)
+
+label_info5 = tk.Label(aba2, text="Produto 5")
+label_info5.grid(row=9,column=5)
+
+label_info6 = tk.Label(aba2, text="Produto 6")
+label_info6.grid(row=9,column=6)
 
 label_nfembalagem = tk.Label(aba2, text="NF PRODUTO")
 label_nfembalagem.grid(row=10,column=0)
 
 entry_nfembalagem1 = tk.Entry(aba2)
 entry_nfembalagem1.grid(row=10,column=1)
+
+entry_nfembalagem2 = tk.Entry(aba2)
+entry_nfembalagem2.grid(row=10,column=2)
+
+entry_nfembalagem3 = tk.Entry(aba2)
+entry_nfembalagem3.grid(row=10,column=3)
+
+entry_nfembalagem4 = tk.Entry(aba2)
+entry_nfembalagem4.grid(row=10,column=4)
+
+entry_nfembalagem5 = tk.Entry(aba2)
+entry_nfembalagem5.grid(row=10,column=5)
+
+entry_nfembalagem6 = tk.Entry(aba2)
+entry_nfembalagem6.grid(row=10,column=6)
 
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=11)
@@ -373,6 +403,21 @@ label_nfpaleteEmb.grid(row=12,column=0)
 entry_nfpaleteEmb1 = tk.Entry(aba2)
 entry_nfpaleteEmb1.grid(row=12,column=1)
 
+entry_nfpaleteEmb2 = tk.Entry(aba2)
+entry_nfpaleteEmb2.grid(row=12,column=2)
+
+entry_nfpaleteEmb3 = tk.Entry(aba2)
+entry_nfpaleteEmb3.grid(row=12,column=3)
+
+entry_nfpaleteEmb4 = tk.Entry(aba2)
+entry_nfpaleteEmb4.grid(row=12,column=4)
+
+entry_nfpaleteEmb5 = tk.Entry(aba2)
+entry_nfpaleteEmb5.grid(row=12,column=5)
+
+entry_nfpaleteEmb6 = tk.Entry(aba2)
+entry_nfpaleteEmb6.grid(row=12,column=6)
+
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=13)
 
@@ -381,6 +426,21 @@ label_codprod.grid(row=14,column=0)
 
 entry_codprod1 = tk.Entry(aba2)
 entry_codprod1.grid(row=14,column=1)
+
+entry_codprod2 = tk.Entry(aba2)
+entry_codprod2.grid(row=14,column=2)
+
+entry_codprod3 = tk.Entry(aba2)
+entry_codprod3.grid(row=14,column=3)
+
+entry_codprod4 = tk.Entry(aba2)
+entry_codprod4.grid(row=14,column=4)
+
+entry_codprod5 = tk.Entry(aba2)
+entry_codprod5.grid(row=14,column=5)
+
+entry_codprod6 = tk.Entry(aba2)
+entry_codprod6.grid(row=14,column=6)
 
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=15)
@@ -391,6 +451,21 @@ label_qtdpalete.grid(row=16,column=0)
 entry_qtdpaleteEmb1 = tk.Entry(aba2)
 entry_qtdpaleteEmb1.grid(row=16,column=1)
 
+entry_qtdpaleteEmb2 = tk.Entry(aba2)
+entry_qtdpaleteEmb2.grid(row=16,column=2)
+
+entry_qtdpaleteEmb3 = tk.Entry(aba2)
+entry_qtdpaleteEmb3.grid(row=16,column=3)
+
+entry_qtdpaleteEmb4 = tk.Entry(aba2)
+entry_qtdpaleteEmb4.grid(row=16,column=4)
+
+entry_qtdpaleteEmb5 = tk.Entry(aba2)
+entry_qtdpaleteEmb5.grid(row=16,column=5)
+
+entry_qtdpaleteEmb6 = tk.Entry(aba2)
+entry_qtdpaleteEmb6.grid(row=16,column=6)
+
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=18)
 
@@ -399,6 +474,21 @@ label_val.grid(row=19,column=0)
 
 entry_valEmb1 = tk.Entry(aba2)
 entry_valEmb1.grid(row=19,column=1)
+
+entry_valEmb2 = tk.Entry(aba2)
+entry_valEmb2.grid(row=19,column=2)
+
+entry_valEmb3 = tk.Entry(aba2)
+entry_valEmb3.grid(row=19,column=3)
+
+entry_valEmb4 = tk.Entry(aba2)
+entry_valEmb4.grid(row=19,column=4)
+
+entry_valEmb5 = tk.Entry(aba2)
+entry_valEmb5.grid(row=19,column=5)
+
+entry_valEmb6 = tk.Entry(aba2)
+entry_valEmb6.grid(row=19,column=6)
 
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=20)
@@ -409,6 +499,21 @@ label_prod.grid(row=21,column=0)
 combobox_nomeprod1 = ttk.Combobox(aba2,values=[])
 combobox_nomeprod1.grid(row=21,column=1)
 
+combobox_nomeprod2 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod2.grid(row=21,column=2)
+
+combobox_nomeprod3 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod3.grid(row=21,column=3)
+
+combobox_nomeprod4 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod4.grid(row=21,column=4)
+
+combobox_nomeprod5 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod5.grid(row=21,column=5)
+
+combobox_nomeprod6 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod6.grid(row=21,column=6)
+
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=22)
 
@@ -417,6 +522,21 @@ label_contUnid.grid(row=23,column=0)
 
 entry_contUnid1 = tk.Entry(aba2)
 entry_contUnid1.grid(row=23,column=1)
+
+entry_contUnid2 = tk.Entry(aba2)
+entry_contUnid2.grid(row=23,column=2)
+
+entry_contUnid3 = tk.Entry(aba2)
+entry_contUnid3.grid(row=23,column=3)
+
+entry_contUnid4 = tk.Entry(aba2)
+entry_contUnid4.grid(row=23,column=4)
+
+entry_contUnid5 = tk.Entry(aba2)
+entry_contUnid5.grid(row=23,column=5)
+
+entry_contUnid6 = tk.Entry(aba2)
+entry_contUnid6.grid(row=23,column=6)
 
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=24)
@@ -427,6 +547,21 @@ label_lotef.grid(row=25,column=0)
 entry_lotef1 = tk.Entry(aba2)
 entry_lotef1.grid(row=25,column=1)
 
+entry_lotef2 = tk.Entry(aba2)
+entry_lotef2.grid(row=25,column=2)
+
+entry_lotef3 = tk.Entry(aba2)
+entry_lotef3.grid(row=25,column=3)
+
+entry_lotef4 = tk.Entry(aba2)
+entry_lotef4.grid(row=25,column=4)
+
+entry_lotef5 = tk.Entry(aba2)
+entry_lotef5.grid(row=25,column=5)
+
+entry_lotef6 = tk.Entry(aba2)
+entry_lotef6.grid(row=25,column=6)
+
 label_espaco = tk.Label(aba2)
 label_espaco.grid(row=26)
 
@@ -435,6 +570,21 @@ label_peso.grid(row=27,column=0)
 
 entry_pesoEmb1 = tk.Entry(aba2)
 entry_pesoEmb1.grid(row=27,column=1)
+
+entry_pesoEmb2 = tk.Entry(aba2)
+entry_pesoEmb2.grid(row=27,column=2)
+
+entry_pesoEmb3 = tk.Entry(aba2)
+entry_pesoEmb3.grid(row=27,column=3)
+
+entry_pesoEmb4 = tk.Entry(aba2)
+entry_pesoEmb4.grid(row=27,column=4)
+
+entry_pesoEmb5 = tk.Entry(aba2)
+entry_pesoEmb5.grid(row=27,column=5)
+
+entry_pesoEmb6 = tk.Entry(aba2)
+entry_pesoEmb6.grid(row=27,column=6)
 
 botao_salvar = tk.Button(aba2, text="Salvar", command=saveEmb)
 botao_salvar.grid(row=28, columnspan=5)

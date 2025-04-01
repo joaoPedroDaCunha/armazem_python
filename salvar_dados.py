@@ -241,10 +241,10 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
-def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem,nfpaleteEmb1,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1,contUnid1,lotef1,pesoEmb1):
+def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem1,nfpaleteEmb1,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1,contUnid1,lotef1,pesoEmb1,nfembalagem2,nfpaleteEmb2,codprod2,qtdpaleteEmb2,valEmb2,nomeprod2,contUnid2,lotef2,pesoEmb2):
     try:
         if date and horario and nome and telefone and placa and tipo and trans and forn:
-            dados_EmbPlan = {'Movimento':['ENTRADA'],'EMISSÃO NF':[date],'PLACA':[placa],'TRANSPORTADOR':[trans],'MATERIAL':[nomeprod1],'TIPO DE PRODUTO':['EMBALAGEM'],'FORNECEDOR':[forn],'NF FORNCEDOR':[nfembalagem],' QTDA ITENS ':[contUnid1],'QTD PALLET':[qtdpaleteEmb1],'NF PALLET':[nfpaleteEmb1],'LOTE 1 FORNECEDOR':[lotef1],'VALIDADE':[valEmb1],'PESO (KG)':[pesoEmb1]}
+            dados_EmbPlan = {'Movimento':['ENTRADA'],'EMISSÃO NF':[date],'PLACA':[placa],'TRANSPORTADOR':[trans],'MATERIAL':[nomeprod1],'TIPO DE PRODUTO':['EMBALAGEM'],'FORNECEDOR':[forn],'NF FORNCEDOR':[nfembalagem1],' QTDA ITENS ':[contUnid1],'QTD PALLET':[qtdpaleteEmb1],'NF PALLET':[nfpaleteEmb1],'LOTE 1 FORNECEDOR':[lotef1],'VALIDADE':[valEmb1],'PESO (KG)':[pesoEmb1]}
             df_dados_EmbPlan = pd.DataFrame(dados_EmbPlan)
             if os.path.exists('dados.xlsx'):
                 wb = load_workbook('dados.xlsx')
@@ -258,7 +258,10 @@ def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfemb
             else:
                 messagebox.showerror("Erro","planilha não existe")
             wb.save('dados.xlsx')
+            messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
         else:
             messagebox.showerror("Erro","preencha as informações")
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+    except PermissionError as e:
+        messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
