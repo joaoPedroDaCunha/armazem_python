@@ -2,8 +2,10 @@ import os
 import pandas as pd
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
+from tkinter import messagebox
 
 def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val,nf1,nfpalete1,qtd1,lote1,peso1,checkbox_lote2_var,nf2,nfpalete2,qtd2,lote2,peso2,checkbox_lote3_var,nf3,nfpalete3,qtd3,lote3,peso3):
+    try:
         if date and horario and nome and telefone and placa and tipo and trans and forn and carga and prod and nf1 and lote1 and peso1:
             # Cria dicionário com os dados principais
             dados_programacao = {
@@ -228,7 +230,22 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
 
             # Salva a planilha
             wb.save('dados.xlsx')
-            print("Sucesso", "Dados salvos com sucesso!")
+            messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
 
         else:
-            print("Erro", "Preencha todos os campos obrigatórios.")
+            messagebox.showinfo("Erro", "Preencha todos os campos obrigatórios.")
+    except ValueError as e:
+        messagebox.showerror("Erro de valor", "Nos campos de QTD e Peso devese colocar exclusivamente numeros")
+    except PermissionError as e:
+        messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+
+def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfembalagem,codprod1,qtdpaleteEmb1,valEmb1,nomeprod1):
+    try:
+        if date and horario and nome and telefone and placa and tipo and trans and forn:
+            dados_EmbPlan = {'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod1,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem,' QTDA ITENS ':qtdpaleteEmb1,}
+        else:
+            messagebox.showerror("Erro","preença as informações")
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")

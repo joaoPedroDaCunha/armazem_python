@@ -1,4 +1,5 @@
 import os
+from threading import Thread
 import time
 import win32com.client as win32
 import openpyxl as ox
@@ -16,6 +17,14 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 def imprimirespelho():
+    try:
+        Thread1 = Thread(target=imprimir)
+        Thread1.daemon
+        Thread1.start()
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+
+def imprimir():
     try:
         caminho_local = resource_path('dados.xlsx')
         arquivo_excel = os.path.join(caminho_local)

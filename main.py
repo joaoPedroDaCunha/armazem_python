@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 import pandas as pd
 import os
+from threading import Thread
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from print import imprimirespelho
@@ -41,7 +42,6 @@ def save():
         entry_lotesal3.get(),
         int(entry_peso3.get() or "0")        # Correto: .get() chamado antes de int()
         )
-        messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
     except ValueError as e:
         messagebox.showerror("Erro de valor", "Nos campos de QTD e Peso devese colocar exclusivamente numeros")
     except PermissionError as e:
@@ -51,7 +51,10 @@ def save():
 
 def prog():
     try:
-        txt(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"),checkbox_lote2_var.get(),checkbox_lote3_var.get())
+        threadtxt = Thread(target=txt, args=(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"),checkbox_lote2_var.get(),checkbox_lote3_var.get()))
+        threadtxt.daemon
+        threadtxt.start()
+        #txt(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"),checkbox_lote2_var.get(),checkbox_lote3_var.get())
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
@@ -93,12 +96,12 @@ notebook = ttk.Notebook(janela)
 notebook.pack(fill='both', expand=True)
 
 # Cria o frame para a primeira aba
-aba1 = tk.Frame(notebook)
-notebook.add(aba1, text="Cadastro Principal")
+aba1 = ttk.Frame(notebook)
+notebook.add(aba1, text="Cadastro Sal")
 
 # Cria o frame para a segunda aba
-aba2 = tk.Frame(notebook)
-notebook.add(aba2, text="Outra Aba")
+aba2 = ttk.Frame(notebook)
+notebook.add(aba2, text="Cadastro Embalagem")
 
 # Aba 1: Cadastro Principal (Seu layout original)
 label_date = tk.Label(aba1, text="Data de entrada:")
@@ -143,7 +146,6 @@ label_espaco.grid(row=5)
 
 label_trans = tk.Label(aba1, text="Transportadora:")
 label_trans.grid(row=6, column=0)
-
 entry_trans = tk.Entry(aba1)
 entry_trans.grid(row=6, column=1)
 
@@ -170,7 +172,6 @@ combobox_carga.set("Selecione uma opção")
 
 label_val = tk.Label(aba1, text="Validade:")
 label_val.grid(row=10, column=0)
-
 entry_val = tk.Entry(aba1)
 entry_val.grid(row=10, column=1)
 
@@ -288,13 +289,126 @@ botao_programaçao.grid(row=16, column=8)
 
 
 # Aba 2: Outra aba com layout diferente
-label_outra = tk.Label(aba2, text="Novo Campo na Segunda Aba:")
-label_outra.grid(row=0, column=0)
-entry_outra = tk.Entry(aba2)
-entry_outra.grid(row=0, column=1)
+label_date = tk.Label(aba2, text="Data de entrada:")
+label_date.grid(row=0, column=0)
+entry_dateEmb = tk.Entry(aba2)
+entry_dateEmb.grid(row=0, column=1)
 
-botao_exemplo = tk.Button(aba2, text="Botão da Segunda Aba")
-botao_exemplo.grid(row=1, column=0)
+label_horario = tk.Label(aba2, text="Horário de chegada:")
+label_horario.grid(row=0, column=3)
+entry_horarioEmb = tk.Entry(aba2)
+entry_horarioEmb.grid(row=0, column=4)
+
+# Adicione aqui o restante do layout da primeira aba (igual ao seu código original)
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=1)
+
+label_nome = tk.Label(aba2, text="Nome do motorista:")
+label_nome.grid(row=2, column=0)
+entry_nomeEmb = tk.Entry(aba2)
+entry_nomeEmb.grid(row=2, column=1)
+
+label_telefone = tk.Label(aba2, text="Telefone:")
+label_telefone.grid(row=2, column=3)
+entry_telefoneEmb = tk.Entry(aba2)
+entry_telefoneEmb.grid(row=2, column=4)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=3)
+
+label_placa = tk.Label(aba2, text="Placa do veículo:")
+label_placa.grid(row=4, column=0)
+entry_placaEmb = tk.Entry(aba2)
+entry_placaEmb.grid(row=4, column=1)
+
+label_tipo = tk.Label(aba2, text="Tipo de Veículo:")
+label_tipo.grid(row=4, column=3)
+entry_tipoEmb = tk.Entry(aba2)
+entry_tipoEmb.grid(row=4, column=4)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=5)
+
+label_trans = tk.Label(aba2, text="Transportadora:")
+label_trans.grid(row=6, column=0)
+entry_transEmb = tk.Entry(aba2)
+entry_transEmb.grid(row=6, column=1)
+
+label_forn = tk.Label(aba2, text="Fornecedor:")
+label_forn.grid(row=7, column=0)
+
+combobox_fornEmb = ttk.Combobox(aba2, values=["NORSAL", "CIMSAL", "CISNE"])
+combobox_fornEmb.grid(row=7, column=1)
+combobox_fornEmb.set("Selecione uma opção")
+
+label_qtdtotal = tk.Label(aba2, text="Quantidade total de Paletes")
+label_qtdtotal.grid(row=7, column=3)
+entry_qtdtotalEmb = tk.Entry(aba2)
+entry_qtdtotalEmb.grid(row=7,column=4)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=8)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=9)
+
+label_info1 = tk.Label(aba2, text="Produto 1")
+label_info1.grid(row=9,column=1)
+
+label_nfembalagem = tk.Label(aba2, text="NF")
+label_nfembalagem.grid(row=10,column=0)
+
+entry_nfembalagem1 = tk.Entry(aba2)
+entry_nfembalagem1.grid(row=10,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=11)
+
+label_codprod = tk.Label(aba2, text="COD. PROD")
+label_codprod.grid(row=12,column=0)
+
+entry_codprod1 = tk.Entry(aba2)
+entry_codprod1.grid(row=12,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=13)
+
+label_qtdpalete = tk.Label(aba2, text="QTA. PALETE")
+label_qtdpalete.grid(row=14,column=0)
+
+entry_qtdpaleteEmb1 = tk.Entry(aba2)
+entry_qtdpaleteEmb1.grid(row=14,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=15)
+
+label_val = tk.Label(aba2,text="DATA VALIDADE")
+label_val.grid(row=16,column=0)
+
+entry_valEmb1 = tk.Entry(aba2)
+entry_valEmb1.grid(row=16,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=17)
+
+label_prod = tk.Label(aba2,text="NOME DO PROD")
+label_prod.grid(row=18,column=0)
+
+combobox_nomeprod1 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod1.grid(row=18,column=1)
+
+label_espaco = tk.Label(aba2)
+label_espaco.grid(row=19)
+
+label_contUnid = tk.Label(aba2)
+label_contUnid
+
+label_lotef = tk.Label(aba2,text="LOTE FORNECEDOR")
+label_lotef.grid(row=20,column=0)
+
+entry_lotef1 = tk.Entry(aba2)
+entry_lotef1.grid(row=20,column=1)
+
 
 # Inicia o loop principal da aplicação
 janela.mainloop()

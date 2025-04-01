@@ -1,5 +1,6 @@
 import time
 import os
+from tkinter import messagebox
 
 def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, prod, carga, nf1, peso1, nf2=None, peso2=None, nf3=None, peso3=None, checkbox2=None ,checkbox3=None):
     try:
@@ -17,4 +18,4 @@ def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, pr
         time.sleep(1)
         os.startfile('meuarquivo.txt')
     except Exception as e:
-        print(e)
+        messagebox.showerror(e)
