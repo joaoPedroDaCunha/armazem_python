@@ -6,7 +6,7 @@ import os
 from threading import Thread
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
-from print import imprimirespelho
+from print import imprimirespelho,imprimirespelhoEmb
 from programacao import txtprogramação as txt
 from salvar_dados import salvar_dados as salvar,salvarEmb
 
@@ -593,6 +593,8 @@ entry_pesoEmb6.grid(row=27,column=6)
 botao_salvar = tk.Button(aba2, text="Salvar", command=saveEmb)
 botao_salvar.grid(row=28, columnspan=5)
 
+botao_imprimir = tk.Button(aba2,text="Imprimir Espelho",command=imprimirespelhoEmb)
+botao_imprimir.grid(row=28, columnspan=9)
 
 
 # Inicia o loop principal da aplicação

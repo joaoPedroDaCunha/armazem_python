@@ -380,7 +380,11 @@ def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfemb
             messagebox.showinfo("Sucesso", "Dados salvos com sucesso!")
         else:
             messagebox.showerror("Erro","preencha as informações")
-    except Exception as e:
-        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+    except FileNotFoundError as e:
+        messagebox.showerror("Erro de Arquivo", f"Arquivo não encontrado: {e}")
     except PermissionError as e:
-        messagebox.showerror("Erro de permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
+        messagebox.showerror("Erro de Permissão", f"Permissão negada: {e}. Verifique se o arquivo está aberto em outro programa.")
+    except ValueError as e:
+        messagebox.showerror("Erro de Valor", f"Dados inválidos: {e}")
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro inesperado: {e}")
