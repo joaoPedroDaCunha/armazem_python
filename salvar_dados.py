@@ -249,6 +249,87 @@ def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfemb
             dados_EmbPlan = {'Movimento':['ENTRADA'],'EMISSÃO NF':[date],'PLACA':[placa],'TRANSPORTADOR':[trans],'MATERIAL':[nomeprod1],'TIPO DE PRODUTO':['EMBALAGEM'],'FORNECEDOR':[forn],'NF FORNCEDOR':[nfembalagem1],' QTDA ITENS ':[contUnid1],'QTD PALLET':[qtdpaleteEmb1],'NF PALLET':[nfpaleteEmb1],'LOTE 1 FORNECEDOR':[lotef1],'VALIDADE':[valEmb1],'PESO (KG)':[pesoEmb1]}
             df_dados_EmbPlan = pd.DataFrame(dados_EmbPlan)
 
+            if nfembalagem2 == None and nfembalagem3 == None and nfembalagem4 == None and nfembalagem5 == None and nfpaleteEmb6 == None:
+                dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [nfembalagem1],
+                'Fornecedor': [forn],
+                'Peso total': [pesoEmb1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Transportadora': [trans]
+            }
+            elif nfembalagem3 == None and nfembalagem4 == None and nfembalagem5 == None and nfembalagem6:
+                dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f"{nfembalagem1}/{nfembalagem2}"],
+                'Fornecedor': [forn],
+                'Peso total': [pesoEmb1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Transportadora': [trans]
+            }
+            elif nfembalagem4 == None and nfembalagem5 == None and nfembalagem6 ==None:
+                 dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f"{nfembalagem1}/{nfembalagem2}/{nfembalagem3}"],
+                'Fornecedor': [forn],
+                'Peso total': [pesoEmb1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Transportadora': [trans]
+            }
+            elif nfembalagem5 == None and nfembalagem6 == None:
+                 dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f"{nfembalagem1}/{nfembalagem2}/{nfembalagem3}/{nfembalagem4}"],
+                'Fornecedor': [forn],
+                'Peso total': [pesoEmb1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Transportadora': [trans]
+            }
+            elif nfembalagem6 == None:
+                 dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f"{nfembalagem1}/{nfembalagem2}/{nfembalagem3}/{nfembalagem4}/{nfembalagem5}"],
+                'Fornecedor': [forn],
+                'Peso total': [pesoEmb1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Transportadora': [trans]
+            }
+            else:
+                dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f"{nfembalagem1}/{nfembalagem2}/{nfembalagem3}/{nfembalagem4}/{nfembalagem5}/{nfembalagem6}"],
+                'Fornecedor': [forn],
+                'Peso total': [pesoEmb1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Transportadora': [trans]
+            }
+                
+            df_programacao = pd.DataFrame(dados_programacao)
+
             if nfembalagem2 != None:
                 df_dados_EmbPlan = pd.concat([df_dados_EmbPlan,pd.DataFrame([{'Movimento':'ENTRADA','EMISSÃO NF':date,'PLACA':placa,'TRANSPORTADOR':trans,'MATERIAL':nomeprod2,'TIPO DE PRODUTO':'EMBALAGEM','FORNECEDOR':forn,'NF FORNCEDOR':nfembalagem2,' QTDA ITENS ':contUnid2,'QTD PALLET':qtdpaleteEmb2,'NF PALLET':nfpaleteEmb2,'LOTE 1 FORNECEDOR':lotef2,'VALIDADE':valEmb2,'PESO (KG)':pesoEmb2}])])
 
@@ -266,6 +347,15 @@ def salvarEmb(date,horario,nome,telefone,placa,tipo,trans,forn,qtdtotalEmb,nfemb
             
             if os.path.exists('dados.xlsx'):
                 wb = load_workbook('dados.xlsx')
+
+                if 'Programacao' not in wb.sheetnames:
+                    ws_programacao = wb.create_sheet("Programacao")
+                else:
+                    ws_programacao = wb['Programacao']
+
+                for row in dataframe_to_rows(df_programacao, index=False, header=False):
+                    ws_programacao.append(row)
+
                 if 'Embalagem Panilha' not in wb.sheetnames:
                     ws_dados_EmbPlan = wb.create_sheet("Embalagem Panilha")
                 else:
