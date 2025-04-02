@@ -7,6 +7,7 @@ import win32print
 import win32api
 from tkinter import messagebox
 import sys
+import pythoncom
 
 def resource_path(relative_path):
     try:
@@ -17,6 +18,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 def imprimirespelho():
+    pythoncom.CoInitialize()
     try:
         Thread1 = Thread(target=imprimir)
         Thread1.daemon
@@ -25,6 +27,7 @@ def imprimirespelho():
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def imprimirespelhoEmb():
+    pythoncom.CoInitialize()
     try:
         Thread1 = Thread(target=imprirmirEmb)
         Thread1.daemon

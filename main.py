@@ -8,6 +8,7 @@ from print import imprimirespelho,imprimirespelhoEmb
 from programacao import txtprogramação as txt
 from programacao import txtprogramaçãoEmb
 from salvar_dados import salvar_dados as salvar,salvarEmb
+import pythoncom
 
 def save():
     try:
@@ -59,6 +60,7 @@ def saveEmb():
               )
 
 def prog():
+    pythoncom.CoInitialize()
     try:
         threadtxt = Thread(target=txt, args=(entry_date.get(),entry_horario.get(),entry_nome.get(),entry_telefone.get(),entry_placa.get(),entry_tipo.get(),entry_trans.get(),combobox_forn.get(),combobox_prod.get(),combobox_carga.get(),entry_nfsal1.get(),int(entry_peso1.get() or "0"),entry_nfsal2.get(),int(entry_peso2.get() or "0"),entry_nfsal3.get(),int(entry_peso3.get() or "0"),checkbox_lote2_var.get(),checkbox_lote3_var.get()))
         threadtxt.daemon
@@ -68,6 +70,7 @@ def prog():
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def progEmb():
+    pythoncom.CoInitialize()
     try:
         threadtxt = Thread(target=txtprogramaçãoEmb, args=(entry_dateEmb.get(),entry_horarioEmb.get(),entry_nomeEmb.get(),entry_telefoneEmb.get(),entry_placaEmb.get(),entry_tipoEmb.get(),entry_transEmb.get(),combobox_fornEmb.get(),entry_qtdtotalEmb.get()
               ,entry_nfembalagem1.get(),entry_nfpaleteEmb1.get(),entry_codprod1.get(),entry_qtdpaleteEmb1.get(),entry_valEmb1.get(),combobox_nomeprod1.get(),entry_contUnid1.get(),entry_lotef1.get(),entry_pesoEmb1.get()
