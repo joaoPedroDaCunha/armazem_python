@@ -2,15 +2,15 @@ import time
 import os
 from tkinter import messagebox
 
-def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, prod, carga, nf1, peso1, nf2=None, peso2=None, nf3=None, peso3=None, checkbox2=None ,checkbox3=None):
+def txtprogramação(date, horario, nome, telefone, placa, tipo, trans, forn, prod, carga, nf1, peso1, nf2, peso2, nf3, peso3, checkbox2 ,checkbox3):
     try:
         with open('meuarquivo.txt', 'w') as arquivo:
 
-            if checkbox2 == 0 and checkbox3 == 0 :
+            if nf2 == None and nf3 == None :
                 arquivo.write(f'{date} {horario} {nome} {telefone} {nf1} {forn} {peso1} {placa} {tipo} {prod} {carga} {trans}\n')
-            if checkbox2 == 1 and checkbox3 == 0 :
+            if nf2 != None and nf3 == None :
                 arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2} {forn} {peso1+peso2} {placa} {tipo} {prod} {carga} {trans}\n')
-            if checkbox2 == 1 and checkbox3 == 1 :
+            if nf1 != None and nf3 != None :
                 arquivo.write(f'{date} {horario} {nome} {telefone} {nf1}/{nf2}/{nf3} {forn} {peso1+peso2+peso3} {placa} {tipo} {prod} {carga} {trans}\n')
 
         print('Texto escrito com sucesso!')

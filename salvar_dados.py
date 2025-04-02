@@ -8,12 +8,41 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
     try:
         if date and horario and nome and telefone and placa and tipo and trans and forn and carga and prod and nf1 and lote1 and peso1:
             # Cria dicionário com os dados principais
-            dados_programacao = {
+            if nf2 == None and nf3 == None:
+                dados_programacao = {
                 'Data de Entrada': [date], 
                 'Horario de entrada': [horario], 
                 'Nome do motorista': [nome],
                 'Telefone': [telefone],
                 'NF': [nf1],
+                'Fornecedor': [forn],
+                'Peso total': [peso1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Tipo do produto': [prod + " " + carga],
+                'Transportadora': [trans]
+                }
+            elif nf2 != None and nf3 == None:
+                dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f'{nf1}/{nf2}'],
+                'Fornecedor': [forn],
+                'Peso total': [peso1],
+                'Placa': [placa],
+                'Tipo de veiculo': [tipo],
+                'Tipo do produto': [prod + " " + carga],
+                'Transportadora': [trans]
+            }
+            else:
+                dados_programacao = {
+                'Data de Entrada': [date], 
+                'Horario de entrada': [horario], 
+                'Nome do motorista': [nome],
+                'Telefone': [telefone],
+                'NF': [f'{nf1}/{nf2}/{nf3}'],
                 'Fornecedor': [forn],
                 'Peso total': [peso1],
                 'Placa': [placa],
@@ -34,12 +63,12 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
             df_planilha = pd.DataFrame(dados_planilha)
 
             # Verifica se o lote 2 deve ser incluído
-            if checkbox_lote2_var.get() == 1:
+            if nf2 != None:
                 if nf2 and lote2 and peso2:
                     df_planilha = pd.concat([df_planilha, pd.DataFrame([{'Movimento': "ENTRADA", 'EMISSÃO NF': date, 'Placa': placa, 'Tipo de veiculo': tipo, 'Transportadora': trans, 'Material': prod, 'Tipo de Carga': carga, 'Fornecedor': forn, 'NF fornecedor': nf2, 'NF Palete': nfpalete2, 'QT NF palete': qtd2, 'Lote do fornecedor': lote2, 'Validade': val, 'Peso': peso2}])], ignore_index=True)
 
             # Verifica se o lote 3 deve ser incluído
-            if checkbox_lote3_var.get() == 1:
+            if nf3 != None:
                 if nf3 and lote3 and peso3:
                     df_planilha = pd.concat([df_planilha, pd.DataFrame([{'Movimento': "ENTRADA", 'EMISSÃO NF': date, 'Placa': placa, 'Tipo de veiculo': tipo, 'Transportadora': trans, 'Material': prod, 'Tipo de Carga': carga, 'Fornecedor': forn, 'NF fornecedor': nf3, 'NF Palete': nfpalete3, 'QT NF palete': qtd3, 'Lote do fornecedor': lote3, 'Validade': val, 'Peso': peso3}])], ignore_index=True)
 
@@ -83,7 +112,7 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
                     ws_descarga_sal['D20'] = nf1
                     ws_descarga_sal['K20'] = nfpalete1
                     ws_descarga_sal['P20'] = peso1
-                    if checkbox_lote2_var.get() == 1:
+                    if nf2 != None:
                         if nf1 == nf2 :
                             ws_descarga_sal['D22'] = " "
                             ws_descarga_sal['K22'] = " "
@@ -97,7 +126,7 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
                         ws_descarga_sal['D22'] = " "
                         ws_descarga_sal['K22'] = " "
                         ws_descarga_sal['P22'] = " "
-                    if checkbox_lote3_var.get() == 1:
+                    if nf3 != None:
                         if nf1 == nf3 and nf1 == nf2:
                             ws_descarga_sal['D24'] = " "
                             ws_descarga_sal['K24'] = " "

@@ -23,22 +23,22 @@ def save():
         combobox_prod.get(),
         combobox_carga.get(),
         entry_val.get(),
-        entry_nfsal1.get(),
-        entry_nfpalete1.get(),
+        entry_nfsal1.get() or None,
+        entry_nfpalete1.get() or None,
         int(entry_qtdpalete1.get() or "0"),  # Correto: .get() chamado antes de int()
-        entry_lotesal1.get(),
+        entry_lotesal1.get() or None,
         int(entry_peso1.get() or "0"),       # Correto: .get() chamado antes de int()
-        checkbox_lote2_var,           # Correto: chamada direta no IntVar
-        entry_nfsal2.get(),
-        entry_nfpalete2.get(),
+        checkbox_lote2_var or None,           # Correto: chamada direta no IntVar
+        entry_nfsal2.get() or None,
+        entry_nfpalete2.get() or None,
         int(entry_qtdpalete2.get() or "0"),  # Correto: .get() chamado antes de int()
-        entry_lotesal2.get(),
+        entry_lotesal2.get() or None,
         int(entry_peso2.get() or "0"),       # Correto: .get() chamado antes de int()
-        checkbox_lote3_var,           # Correto: chamada direta no IntVar
-        entry_nfsal3.get(),
-        entry_nfpalete3.get(),
+        checkbox_lote3_var or None,           # Correto: chamada direta no IntVar
+        entry_nfsal3.get() or None,
+        entry_nfpalete3.get() or None,
         int(entry_qtdpalete3.get() or "0"),  # Correto: .get() chamado antes de int()
-        entry_lotesal3.get(),
+        entry_lotesal3.get() or None,
         int(entry_peso3.get() or "0")        # Correto: .get() chamado antes de int()
         )
     except ValueError as e:
@@ -292,9 +292,11 @@ label_peso1.grid(row=11, column=8)
 entry_peso1 = tk.Entry(aba1)
 entry_peso1.grid(row=11, column=9)
 
+label_espaco = tk.Label(aba1)
+label_espaco.grid(row=12)
+#___________________________________
 checkbox_lote2_var = tk.IntVar()
-checkbox_lote2 = tk.Checkbutton(aba1, text="Incluir Lote 2", variable=checkbox_lote2_var)
-checkbox_lote2.grid(row=12, column=0)
+#__________________________________
 
 label_nfsal2 = tk.Label(aba1, text="NF do produto:")
 label_nfsal2.grid(row=13, column=0)
@@ -326,9 +328,12 @@ label_peso2.grid(row=13, column=8)
 entry_peso2 = tk.Entry(aba1)
 entry_peso2.grid(row=13, column=9)
 
+label_espaco = tk.Label(aba1)
+label_espaco.grid(row=14)
+
+#____________________________________
 checkbox_lote3_var = tk.IntVar()
-checkbox_lote3 = tk.Checkbutton(aba1, text="Incluir Lote 3", variable=checkbox_lote3_var)
-checkbox_lote3.grid(row=14, column=0)
+#____________________________________
 
 label_nfsal3 = tk.Label(aba1, text="NF do produto:")
 label_nfsal3.grid(row=15, column=0)
