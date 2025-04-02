@@ -424,7 +424,7 @@ entry_transEmb.grid(row=6, column=1)
 label_forn = tk.Label(aba2, text="Fornecedor:")
 label_forn.grid(row=7, column=0)
 
-combobox_fornEmb = ttk.Combobox(aba2, values=[])
+combobox_fornEmb = ttk.Combobox(aba2, values=["ROSE PLASTIC","PENTINPACK","BOMIX","ALTA MOGIANA","POLIOTTO","FINEPACK"])
 combobox_fornEmb.grid(row=7, column=1)
 
 label_qtdtotal = tk.Label(aba2, text="Quantidade Total/palete")
@@ -577,22 +577,22 @@ label_espaco.grid(row=20)
 label_prod = tk.Label(aba2,text="NOME DO PROD")
 label_prod.grid(row=21,column=0)
 
-combobox_nomeprod1 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod1 = ttk.Combobox(aba2,values=["COPO SABOR AMI 300G","BOBINA DE SAZON 60G","COPO RECEITA DE CASA 450G","TAMPA RECEITA DE CASA ","BALDE SABOR AMI"])
 combobox_nomeprod1.grid(row=21,column=1)
 
-combobox_nomeprod2 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod2 = ttk.Combobox(aba2,values=["COPO SABOR AMI 300G","BOBINA DE SAZON 60G","COPO RECEITA DE CASA 450G","TAMPA RECEITA DE CASA ","BALDE SABOR AMI"])
 combobox_nomeprod2.grid(row=21,column=2)
 
-combobox_nomeprod3 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod3 = ttk.Combobox(aba2,values=["COPO SABOR AMI 300G","BOBINA DE SAZON 60G","COPO RECEITA DE CASA 450G","TAMPA RECEITA DE CASA ","BALDE SABOR AMI"])
 combobox_nomeprod3.grid(row=21,column=3)
 
-combobox_nomeprod4 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod4 = ttk.Combobox(aba2,values=["COPO SABOR AMI 300G","BOBINA DE SAZON 60G","COPO RECEITA DE CASA 450G","TAMPA RECEITA DE CASA ","BALDE SABOR AMI"])
 combobox_nomeprod4.grid(row=21,column=4)
 
-combobox_nomeprod5 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod5 = ttk.Combobox(aba2,values=["COPO SABOR AMI 300G","BOBINA DE SAZON 60G","COPO RECEITA DE CASA 450G","TAMPA RECEITA DE CASA ","BALDE SABOR AMI"])
 combobox_nomeprod5.grid(row=21,column=5)
 
-combobox_nomeprod6 = ttk.Combobox(aba2,values=[])
+combobox_nomeprod6 = ttk.Combobox(aba2,values=["COPO SABOR AMI 300G","BOBINA DE SAZON 60G","COPO RECEITA DE CASA 450G","TAMPA RECEITA DE CASA ","BALDE SABOR AMI"])
 combobox_nomeprod6.grid(row=21,column=6)
 
 label_espaco = tk.Label(aba2)
