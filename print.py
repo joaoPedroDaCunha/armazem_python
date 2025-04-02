@@ -18,7 +18,6 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 def imprimirespelho():
-    pythoncom.CoInitialize()
     try:
         Thread1 = Thread(target=imprimir)
         Thread1.daemon
@@ -27,7 +26,6 @@ def imprimirespelho():
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def imprimirespelhoEmb():
-    pythoncom.CoInitialize()
     try:
         Thread1 = Thread(target=imprirmirEmb)
         Thread1.daemon
@@ -36,6 +34,7 @@ def imprimirespelhoEmb():
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
 def imprimir():
+    pythoncom.CoInitialize()
     try:
         caminho_local = resource_path('dados.xlsx')
         arquivo_excel = os.path.join(caminho_local)
@@ -100,8 +99,12 @@ def imprimir():
             print(f"PDF {pdf_path} excluído com sucesso!")
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+    finally:
+        pythoncom.CoUninitialize()
+    
 
 def imprirmirEmb():
+    pythoncom.CoInitialize()
     try:
         caminho_local = resource_path('dados.xlsx')
         arquivo_excel = os.path.join(caminho_local)
@@ -145,3 +148,5 @@ def imprirmirEmb():
     
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+    finally:
+        pythoncom.CoUninitialize()
