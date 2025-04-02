@@ -1,13 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
-import pandas as pd
-import os
 from threading import Thread
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 from print import imprimirespelho,imprimirespelhoEmb
 from programacao import txtprogramação as txt
+from programacao import txtprogramaçãoEmb
 from salvar_dados import salvar_dados as salvar,salvarEmb
 
 def save():
@@ -68,6 +67,21 @@ def prog():
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
+def progEmb():
+    try:
+        threadtxt = Thread(target=txtprogramaçãoEmb, args=(entry_dateEmb.get(),entry_horarioEmb.get(),entry_nomeEmb.get(),entry_telefoneEmb.get(),entry_placaEmb.get(),entry_tipoEmb.get(),entry_transEmb.get(),combobox_fornEmb.get(),entry_qtdtotalEmb.get()
+              ,entry_nfembalagem1.get(),entry_nfpaleteEmb1.get(),entry_codprod1.get(),entry_qtdpaleteEmb1.get(),entry_valEmb1.get(),combobox_nomeprod1.get(),entry_contUnid1.get(),entry_lotef1.get(),entry_pesoEmb1.get()
+              ,entry_nfembalagem2.get() or None,entry_nfpaleteEmb2.get() or None,entry_codprod2.get() or None,entry_qtdpaleteEmb2.get() or None,entry_valEmb2.get() or None,combobox_nomeprod2.get() or None,entry_contUnid2.get() or None,entry_lotef2.get() or None,entry_pesoEmb2.get() or None
+              ,entry_nfembalagem3.get() or None,entry_nfpaleteEmb3.get() or None,entry_codprod3.get() or None,entry_qtdpaleteEmb3.get() or None,entry_valEmb3.get() or None,combobox_nomeprod3.get() or None,entry_contUnid3.get() or None,entry_lotef3.get() or None,entry_pesoEmb3.get() or None
+              ,entry_nfembalagem4.get() or None,entry_nfpaleteEmb4.get() or None,entry_codprod4.get() or None,entry_qtdpaleteEmb4.get() or None,entry_valEmb4.get() or None,combobox_nomeprod4.get() or None,entry_contUnid4.get() or None,entry_lotef4.get() or None,entry_pesoEmb4.get() or None
+              ,entry_nfembalagem5.get() or None,entry_nfpaleteEmb5.get() or None,entry_codprod5.get() or None,entry_qtdpaleteEmb5.get() or None,entry_valEmb5.get() or None,combobox_nomeprod5.get() or None,entry_contUnid5.get() or None,entry_lotef5.get() or None,entry_pesoEmb5.get() or None
+              ,entry_nfembalagem6.get() or None,entry_nfpaleteEmb6.get() or None,entry_codprod6.get() or None,entry_qtdpaleteEmb6.get() or None,entry_valEmb6.get() or None,combobox_nomeprod6.get() or None,entry_contUnid6.get() or None,entry_lotef6.get() or None,entry_pesoEmb6.get() or None
+              ))
+        threadtxt.daemon
+        threadtxt.start()
+    except Exception as e:
+        messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
+
 def limpar():
     try:
         entry_date.delete(0,tk.END)
@@ -93,6 +107,69 @@ def limpar():
         entry_qtdpalete3.delete(0,tk.END)
         entry_lotesal3.delete(0,tk.END)
         entry_peso3.delete(0,tk.END)
+        entry_dateEmb.delete(0,tk.END)
+        entry_horarioEmb.delete(0,tk.END)
+        entry_nomeEmb.delete(0,tk.END)
+        entry_telefoneEmb.delete(0,tk.END)
+        entry_placaEmb.delete(0,tk.END)
+        entry_tipoEmb.delete(0,tk.END)
+        entry_transEmb.delete(0,tk.END)
+        combobox_fornEmb.delete(0,tk.END)
+        entry_qtdtotalEmb.delete(0,tk.END)
+        entry_nfembalagem1.delete(0,tk.END)
+        entry_nfpaleteEmb1.delete(0,tk.END)
+        entry_codprod1.delete(0,tk.END)
+        entry_qtdpaleteEmb1.delete(0,tk.END)
+        entry_valEmb1.delete(0,tk.END)
+        combobox_nomeprod1.delete(0,tk.END)
+        entry_contUnid1.delete(0,tk.END)
+        entry_lotef1.delete(0,tk.END)
+        entry_pesoEmb1.delete(0,tk.END)
+        entry_nfembalagem2.delete(0,tk.END)
+        entry_nfpaleteEmb2.delete(0,tk.END)
+        entry_codprod2.delete(0,tk.END)
+        entry_qtdpaleteEmb2.delete(0,tk.END)
+        entry_valEmb2.delete(0,tk.END)
+        combobox_nomeprod2.delete(0,tk.END)
+        entry_contUnid2.delete(0,tk.END)
+        entry_lotef2.delete(0,tk.END)
+        entry_pesoEmb2.delete(0,tk.END)
+        entry_nfembalagem3.delete(0,tk.END)
+        entry_nfpaleteEmb3.delete(0,tk.END)
+        entry_codprod3.delete(0,tk.END)
+        entry_qtdpaleteEmb3.delete(0,tk.END)
+        entry_valEmb3.delete(0,tk.END)
+        combobox_nomeprod3.delete(0,tk.END)
+        entry_contUnid3.delete(0,tk.END)
+        entry_lotef3.delete(0,tk.END)
+        entry_pesoEmb3.delete(0,tk.END)
+        entry_nfembalagem4.delete(0,tk.END)
+        entry_nfpaleteEmb4.delete(0,tk.END)
+        entry_codprod4.delete(0,tk.END)
+        entry_qtdpaleteEmb4.delete(0,tk.END)
+        entry_valEmb4.delete(0,tk.END)
+        combobox_nomeprod4.delete(0,tk.END)
+        entry_contUnid4.delete(0,tk.END)
+        entry_lotef4.delete(0,tk.END)
+        entry_pesoEmb4.delete(0,tk.END)
+        entry_nfembalagem5.delete(0,tk.END)
+        entry_nfpaleteEmb5.delete(0,tk.END)
+        entry_codprod5.delete(0,tk.END)
+        entry_qtdpaleteEmb5.delete(0,tk.END)
+        entry_valEmb5.delete(0,tk.END)
+        combobox_nomeprod5.delete(0,tk.END)
+        entry_contUnid5.delete(0,tk.END)
+        entry_lotef5.delete(0,tk.END)
+        entry_pesoEmb5.delete(0,tk.END)
+        entry_nfembalagem6.delete(0,tk.END)
+        entry_nfpaleteEmb6.delete(0,tk.END)
+        entry_codprod6.delete(0,tk.END)
+        entry_qtdpaleteEmb6.delete(0,tk.END)
+        entry_valEmb6.delete(0,tk.END)
+        combobox_nomeprod6.delete(0,tk.END)
+        entry_contUnid6.delete(0,tk.END)
+        entry_lotef6.delete(0,tk.END)
+        entry_pesoEmb6.delete(0,tk.END)        
     except Exception as e:
         messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
@@ -350,7 +427,7 @@ label_forn.grid(row=7, column=0)
 combobox_fornEmb = ttk.Combobox(aba2, values=[])
 combobox_fornEmb.grid(row=7, column=1)
 
-label_qtdtotal = tk.Label(aba2, text="Quantidade total de Paletes")
+label_qtdtotal = tk.Label(aba2, text="Quantidade Total/palete")
 label_qtdtotal.grid(row=7, column=3)
 
 entry_qtdtotalEmb = tk.Entry(aba2)
@@ -595,6 +672,12 @@ botao_salvar.grid(row=28, columnspan=5)
 
 botao_imprimir = tk.Button(aba2,text="Imprimir Espelho",command=imprimirespelhoEmb)
 botao_imprimir.grid(row=28, columnspan=9)
+
+botao_programaçao = tk.Button(aba2,text="Programação txt",command=progEmb)
+botao_programaçao.grid(row=28, column=8)
+
+botao_limpar = tk.Button(aba2,text="Limpar informações",command=limpar)
+botao_limpar.grid(row=1, column=8)
 
 
 # Inicia o loop principal da aplicação
