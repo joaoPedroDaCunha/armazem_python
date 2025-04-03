@@ -146,7 +146,7 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
                     ws_descarga_sal['H28'] = nf1
                     ws_descarga_sal['K28'] = peso1
                     ws_descarga_sal['O28'] = qtd1
-                    if checkbox_lote2_var.get() == 1:
+                    if nf2 != None:
                         ws_descarga_sal['D30'] = lote2
                         ws_descarga_sal['H30'] = nf2
                         ws_descarga_sal['K30'] = peso2
@@ -156,7 +156,7 @@ def salvar_dados(date,horario,nome,telefone,placa,tipo,trans,forn,prod,carga,val
                         ws_descarga_sal['H30'] = " "
                         ws_descarga_sal['K30'] = " "
                         ws_descarga_sal['O30'] = " "
-                    if checkbox_lote3_var.get() == 1:
+                    if nf3 != None:
                         ws_descarga_sal['D32'] = lote3
                         ws_descarga_sal['H32'] = nf3
                         ws_descarga_sal['K32'] = peso3
